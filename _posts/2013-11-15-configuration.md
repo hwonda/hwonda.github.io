@@ -12,7 +12,7 @@ In your config file change these settings
 title: dbyll
 author:  
   name: yourname  
-  email: youremail  
+  email: aaa
   github: asd123  
   twitter: asd123  
   pinterest: asd123  
