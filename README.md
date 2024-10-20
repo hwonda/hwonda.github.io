@@ -1,1 +1,1 @@
-github.io 배포용
+# dxwiki.github.io
