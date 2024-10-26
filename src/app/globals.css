@@ -8,6 +8,7 @@
   --accent-color: #0099CC;
   --background-color: #F8F8F8;
   --text-color: #333333;
+  --text-secondary-color: #666666;
   --border-color: #CCCCCC; /* 밝은 테마의 기본 테두리 색상 */
 }
 
@@ -17,6 +18,7 @@
   --accent-color: #66A2B7;
   --background-color: #121212;
   --text-color: #E5E5E5;
+  --text-secondary-color: #B0B0B0;
   --border-color: #666666; /* 다크 테마의 기본 테두리 색상 */
 }
 
@@ -43,7 +45,7 @@
   color: var(--primary-color);
 }
 .text-sub {
-  color: var(--secondary-color);
+  color: var(--text-secondary-color);
 }
 .text-accent {
   color: var(--accent-color);
@@ -56,8 +58,23 @@
 .h-content {
   height: calc(100vh - 64px);
 }
-/* body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-} */
+
+.hyperlink {
+  color: var(--accent-color);
+  text-decoration: underline;
+  &:hover {
+    color: var(--primary-color);
+    font-weight: 700;
+  }
+}
+
+@layer base {
+  @media (min-width: 640px) {
+    section > :not(h2) {
+      margin-left: 8px;
+    }
+    h2{
+      font-weight: 700;
+    }
+  }
+}

@@ -5,6 +5,9 @@ const config: Config = {
   content: ['./src/**/*.{ts,tsx,mdx}'],
   theme: {
     extend: {
+      colors: {
+        'custom-border': 'var(--border-color)',
+      },
     },
   },
   plugins: [],
