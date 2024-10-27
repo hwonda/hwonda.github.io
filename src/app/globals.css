@@ -31,6 +31,12 @@
 .bg-accent {
   background-color: var(--accent-color);
 }
+.hover-bg-primary {
+  &:hover {
+    color: var(--text-color);
+    background-color: var(--primary-color);
+  }
+}
 
 .button-bg-gray {
   &:hover {
@@ -64,17 +70,20 @@
   text-decoration: underline;
   &:hover {
     color: var(--primary-color);
-    font-weight: 700;
   }
 }
 
 @layer base {
+  h2{
+    font-weight: 700;
+    @apply font-noto;
+  }
+  p, div{
+    @apply font-nanum;
+  }
   @media (min-width: 640px) {
     section > :not(h2) {
       margin-left: 8px;
-    }
-    h2{
-      font-weight: 700;
     }
   }
 }

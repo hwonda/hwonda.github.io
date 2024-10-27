@@ -21,7 +21,7 @@ export default function PaginationClient({ termsData, itemsPerPage }: Props) {
   const endIndex = startIndex + itemsPerPage;
   const paginatedData = termsData.slice(startIndex, endIndex);
 
-  const startPage = (currentGroup - 1) * pagesPerGroup + 1;
+  const startPage = ((currentGroup - 1) * pagesPerGroup) + 1;
   const endPage = Math.min(startPage + pagesPerGroup - 1, totalPages);
   const pageNumbers = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
 
@@ -32,9 +32,9 @@ export default function PaginationClient({ termsData, itemsPerPage }: Props) {
           {paginatedData.map((term) => (
             <li key={term.id}>
               <Link href={term.url} className='w-full grid grid-cols-[2fr_7fr_1fr] py-5 border-b border-gray-500'>
-                <strong>{term.title.ko}{term.id}</strong>
+                <strong>{term.title.ko}</strong>
                 <p>{term.description.short}</p>
-                <p>{term.difficulty.level}stars</p>
+                <p>{term.difficulty.level + 'stars'}</p>
               </Link>
             </li>
           ))}
@@ -42,37 +42,35 @@ export default function PaginationClient({ termsData, itemsPerPage }: Props) {
       ) : (
         <p>{'No terms found.'}</p>
       )}
-      {totalPages > 1 && ( // totalPages가 1 이상일 때만 페이지네이션 표시
-        <div className="pagination flex space-x-2 mt-10 justify-center">
-          <button onClick={() => setCurrentPage(1)} className={`px-3 py-1 rounded-md ${currentPage === 1 ? 'opacity-0' : ''}`}>{'<<'}</button>
-          <button
-            onClick={() => setCurrentPage(currentPage - 1)}
-            disabled={currentPage === 1}
-            className={`px-3 py-1 rounded-md ${currentPage === 1 ? 'opacity-0' : ''}`}
-          >
-            {'<'}
-          </button>
+      <div className="pagination flex space-x-2 mt-10 justify-center">
+        <button onClick={() => setCurrentPage(1)} className={`px-3 py-1 rounded-md ${ currentPage === 1 ? 'opacity-0' : '' }`}>{'<<'}</button>
+        <button
+          onClick={() => setCurrentPage(currentPage - 1)}
+          disabled={currentPage === 1}
+          className={`px-3 py-1 rounded-md ${ currentPage === 1 ? 'opacity-0' : '' }`}
+        >
+          {'<'}
+        </button>
 
-          {pageNumbers.map((pageNumber) => (
-            <button
-              key={pageNumber}
-              onClick={() => setCurrentPage(pageNumber)}
-              className={`px-3 py-1 rounded-md ${pageNumber === currentPage ? 'bg-[#33cfff] text-white' : ''}`}
-            >
-              {pageNumber}
-            </button>
-          ))}
-
+        {pageNumbers.map((pageNumber) => (
           <button
-            onClick={() => setCurrentPage(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className={`px-3 py-1 rounded-md ${currentPage === totalPages ? 'opacity-0' : ''}`}
+            key={pageNumber}
+            onClick={() => setCurrentPage(pageNumber)}
+            className={`px-3 py-1 rounded-md ${ pageNumber === currentPage ? 'bg-[#33cfff] text-white' : '' }`}
           >
-            {'>'}
+            {pageNumber}
           </button>
-          <button onClick={() => setCurrentPage(totalPages)} className={`px-3 py-1 rounded-md ${currentPage === totalPages? 'opacity-0' : ''}`}>{'>>'}</button>
-        </div>
-      )}
+        ))}
+
+        <button
+          onClick={() => setCurrentPage(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className={`px-3 py-1 rounded-md ${ currentPage === totalPages ? 'opacity-0' : '' }`}
+        >
+          {'>'}
+        </button>
+        <button onClick={() => setCurrentPage(totalPages)} className={`px-3 py-1 rounded-md ${ currentPage === totalPages ? 'opacity-0' : '' }`}>{'>>'}</button>
+      </div>
     </>
   );
 }

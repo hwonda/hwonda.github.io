@@ -22,7 +22,7 @@ const Header = () => {
     <header className='bg-main fixed left-0 top-0 z-50 w-full shadow'>
       <div className='mx-auto flex justify-between sm:grid sm:grid-cols-2 max-w-6xl items-center px-4 py-3 md:px-6 lg:px-8'>
         <Link href='/'>
-          <h1 className='text-3xl font-bold text-primary'>{'Diki'}</h1>
+          <h1 className='text-3xl font-bold text-primary font-noto'>{'Diki'}</h1>
         </Link>
         {/* <div className='hidden sm:flex justify-center'>
           {navItems.map((item) => (
@@ -32,7 +32,7 @@ const Header = () => {
           ))}
         </div> */}
         <div className='flex justify-end items-center gap-2'>
-          <div className='hidden sm:block'>
+          <div>
             <ThemeSwitch />
           </div>
           {/* <div className='block sm:hidden'>

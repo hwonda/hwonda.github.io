@@ -17,7 +17,7 @@ const PostDetail = async ({ slug }: Props) => {
     <div>
       <section className='flex justify-between items-end my-5 py-5 border-b border-main'>
         <div className='flex flex-col'>
-          <h1 className="text-3xl font-bold text-primary">{term.title.ko}</h1>
+          <h1 className="text-3xl font-bold text-primary font-noto">{term.title.ko}</h1>
           <p className='text-sub'>{term.description.short}</p>
         </div>
         <div className='hidden sm:flex flex-col'>
@@ -47,7 +47,7 @@ const PostDetail = async ({ slug }: Props) => {
               {'난이도'}
             </h2>
             <p>{term.difficulty.level}{' stars'}</p>
-            <p>{term.difficulty.description}</p>
+            <p className='mt-2'>{term.difficulty.description}</p>
           </section>
 
           <section className="my-10 group">
@@ -94,7 +94,7 @@ const PostDetail = async ({ slug }: Props) => {
             <ul>
               {term.terms.map((item, index) => (
                 <li key={index} className='my-2 flex items-center'>
-                  <span className='px-2 py-1 rounded-3xl bg-accent text-white mr-2 shrink-0'>
+                  <span className='px-2 py-1 rounded-3xl bg-accent hover-bg-primary text-white mr-2 shrink-0'>
                     <a
                       href={item.link}
                       target="_blank"
@@ -116,9 +116,18 @@ const PostDetail = async ({ slug }: Props) => {
               <span className="text-primary sm:ml-[-20px] mr-2 sm:opacity-0 group-hover:opacity-100 transition-opacity">{'#'}</span>
               {'사용사례'}
             </h2>
-            <p>{term.usecase.industries.join(', ')}</p>
+            <div className="flex flex-wrap gap-1 mb-2">
+              {term.usecase.industries.map((tag, index) => (
+                <button
+                  key={index}
+                  className="px-2 py-0.5 hover-bg-primary rounded-3xl bg-accent text-white"
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
             <p>{term.usecase.example}</p>
-            <p className='text-sub'>{term.usecase.description}</p>
+            <p className='text-sub mt-2'>{term.usecase.description}</p>
           </section>
 
           <section className="my-10 group">
@@ -182,11 +191,11 @@ const PostDetail = async ({ slug }: Props) => {
               <span className="text-primary sm:ml-[-20px] mr-2 sm:opacity-0 group-hover:opacity-100 transition-opacity">{'#'}</span>
               {'Tags'}
             </h2>
-            <div className="flex flex-wrap gap-0.5">
+            <div className="flex flex-wrap gap-1">
               {term.tags.map((tag, index) => (
                 <button
                   key={index}
-                  className="px-3 py-1 rounded-3xl bg-accent text-white mr-2"
+                  className="px-3 py-1 rounded-3xl bg-accent text-white hover-bg-primary"
                 >
                   {tag}
                 </button>
