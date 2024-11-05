@@ -5,7 +5,6 @@ let cachedTermsData: TermData[] | null = null;
 let unsubscribe: (()=> void) | null = null;
 
 const subscribeToTermsData = (updateCallback: (data: TermData[])=> void) => {
-  // 실시간 데이터 구독을 설정하고 unsubscribe 함수를 반환합니다.
   unsubscribe = firestore.collection('terms').onSnapshot((snapshot) => {
     cachedTermsData = snapshot.docs.map((doc) => {
       const data = doc.data();
@@ -34,7 +33,6 @@ const fetchTermsData = async (): Promise<TermData[]> => {
     return cachedTermsData;
   }
 
-  // 최초 호출 시 데이터를 수신하도록 구독을 설정합니다.
   return new Promise((resolve) => {
     subscribeToTermsData((data) => {
       cachedTermsData = data;
