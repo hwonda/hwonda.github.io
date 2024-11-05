@@ -32,9 +32,9 @@ export default function PaginationClient({ termsData, itemsPerPage }: Props) {
           {paginatedData.map((term) => (
             <li key={term.id}>
               <Link href={term.url} className='w-full grid grid-cols-[2fr_7fr_1fr] py-5 border-b border-gray-500'>
-                <strong>{term.title.ko}</strong>
-                <p>{term.description.short}</p>
-                <p>{term.difficulty.level + 'stars'}</p>
+                <span>{term.title.ko}</span>
+                <span>{term.description.short}</span>
+                <span>{term.difficulty.level + 'stars'}</span>
               </Link>
             </li>
           ))}

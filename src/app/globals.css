@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+body, * {
+  font-family: 'Pretendard', sans-serif;
+}
+
+h2{
+  font-weight: 700;
+  font-family: 'font-noto', sans-serif;
+}
+
 :root {
   --primary-color: #33cfff;
   --secondary-color: #F3F9FC;
@@ -25,7 +34,7 @@
 .bg-main {
   background-color: var(--background-color);
 }
-.bg-sub{
+.bg-sub {
   background-color: var(--secondary-color);
 }
 .bg-accent {
@@ -70,20 +79,5 @@
   text-decoration: underline;
   &:hover {
     color: var(--primary-color);
-  }
-}
-
-@layer base {
-  h2{
-    font-weight: 700;
-    @apply font-noto;
-  }
-  p, div{
-    @apply font-nanum;
-  }
-  @media (min-width: 640px) {
-    section > :not(h2) {
-      margin-left: 8px;
-    }
   }
 }
