@@ -49,7 +49,7 @@ const DropdownList = ({
   return isOpen ? (
     <div
       ref={contentRef}
-      className={`absolute z-50 mt-2 min-w-36 rounded-lg bg-sub shadow-lg ring-1 ring-black/5 transition duration-200 ease-out ${
+      className={`absolute flex flex-col p-1 z-50 mt-2 min-w-36 rounded-lg bg-background border border-secondary shadow-lg ring-1 ring-black/5 transition duration-200 ease-out ${
         align === 'end' ? 'right-0' : 'left-0'
       }`}
       onClick={close} // 메뉴 아이템 클릭 시 메뉴를 닫기 위해 사용
@@ -73,13 +73,15 @@ const DropdownItem = ({
 
   return (
     <button
-      className={`flex w-full items-center rounded-lg px-4 py-2 text-left text-sm text-main transition-colors duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-900 ${ className }`}
+      className={`flex w-full justify-center items-center rounded-lg text-left text-sm text-main ${ className }`}
       onClick={() => {
         if (onClick) onClick();
         close();
       }}
     >
-      {children}
+      <span className='w-full p-2 rounded-md transition-colors duration-150 ease-in-out hover:bg-background-secondary'>
+        {children}
+      </span>
     </button>
   );
 };

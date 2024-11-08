@@ -2,82 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-body, * {
+* {
   font-family: 'Pretendard', sans-serif;
 }
 
-h2{
-  font-weight: 700;
-  font-family: 'font-noto', sans-serif;
+body {
+  background-color: var(--background);
 }
 
 :root {
-  --primary-color: #33cfff;
-  --secondary-color: #F3F9FC;
-  --accent-color: #0099CC;
-  --background-color: #F8F8F8;
-  --text-color: #333333;
-  --text-secondary-color: #666666;
-  --border-color: #CCCCCC; /* 밝은 테마의 기본 테두리 색상 */
+  --primary: #33cfff;
+  --secondary: #b9ddf1;
+  --accent: #0099CC;
+  
+  --background: #F8F8F8;
+  --background-secondary: #e0e9ed;
+
+  --text: #333333;
+  --text-secondary: #666666;
+
+  --border: #CCCCCC; /* 밝은 테마의 기본 테두리 색상 */
 }
 
 .dark {
-  --primary-color: #33cfff;
-  --secondary-color: #1E3A47;
-  --accent-color: #66A2B7;
-  --background-color: #121212;
-  --text-color: #E5E5E5;
-  --text-secondary-color: #B0B0B0;
-  --border-color: #666666; /* 다크 테마의 기본 테두리 색상 */
+  --primary: #33cfff;
+  --secondary: #03537f;
+  --accent: #66A2B7;
+  
+  --background: #121212;
+  --background-secondary: #1E3A47;
+
+  --text: #E5E5E5;
+  --text-secondary: #B0B0B0;
+
+  --border: #666666; /* 다크 테마의 기본 테두리 색상 */
 }
 
-.bg-main {
-  background-color: var(--background-color);
-}
-.bg-sub {
-  background-color: var(--secondary-color);
-}
-.bg-accent {
-  background-color: var(--accent-color);
-}
-.hover-bg-primary {
-  &:hover {
-    color: var(--text-color);
-    background-color: var(--primary-color);
-  }
-}
-
-.button-bg-gray {
-  &:hover {
-    background-color: var(--border-color);
-  }
-}
-
-.text-main {
-  color: var(--text-color);
-}
 .text-primary {
-  color: var(--primary-color);
-}
-.text-sub {
-  color: var(--text-secondary-color);
-}
-.text-accent {
-  color: var(--accent-color);
-}
-
-.border-main {
-  color: var(--border-color);
-}
-
-.h-content {
-  height: calc(100vh - 64px);
-}
-
-.hyperlink {
-  color: var(--accent-color);
-  text-decoration: underline;
-  &:hover {
-    color: var(--primary-color);
-  }
+  color: var(--primary);
 }

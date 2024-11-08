@@ -19,10 +19,10 @@ const Header = () => {
   // ];
 
   return (
-    <header className='bg-main fixed left-0 top-0 z-50 w-full shadow'>
+    <header className='fixed left-0 top-0 z-50 w-full border-b border-secondary bg-background opacity-80 hover:opacity-100'>
       <div className='mx-auto flex justify-between sm:grid sm:grid-cols-2 max-w-6xl items-center px-4 py-3 md:px-6 lg:px-8'>
         <Link href='/'>
-          <h1 className='text-3xl font-bold text-primary font-noto'>{'Diki'}</h1>
+          <h1 className='text-3xl font-bold font-noto text-primary'>{'Diki'}</h1>
         </Link>
         {/* <div className='hidden sm:flex justify-center'>
           {navItems.map((item) => (

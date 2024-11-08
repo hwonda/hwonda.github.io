@@ -18,7 +18,6 @@ const RootLayout = ({ children }: RootLayoutProps) => {
     <html lang='en' suppressHydrationWarning>
       <body
         className={`
-        bg-main text-main 
         ${ fontNanum.variable } 
         ${ fontCoding.variable } 
         ${ fontNoto.variable } 

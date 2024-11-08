@@ -28,12 +28,12 @@ export default function PaginationClient({ termsData, itemsPerPage }: Props) {
   return (
     <>
       {paginatedData.length > 0 ? (
-        <ul className='border-t-2 border-gray-700'>
+        <ul className='border-t border-gray-400'>
           {paginatedData.map((term) => (
             <li key={term.id}>
-              <Link href={term.url} className='w-full grid grid-cols-[2fr_7fr_1fr] py-5 border-b border-gray-500'>
-                <span>{term.title.ko}</span>
-                <span>{term.description.short}</span>
+              <Link href={term.url} className='w-full grid grid-cols-[2fr_7fr_1fr] py-5 border-b border-light hover:bg-background-secondary'>
+                <span className='font-noto ml-4'>{term.title.ko}</span>
+                <span className='text-sub'>{term.description.short}</span>
                 <span>{term.difficulty.level + 'stars'}</span>
               </Link>
             </li>
@@ -56,7 +56,7 @@ export default function PaginationClient({ termsData, itemsPerPage }: Props) {
           <button
             key={pageNumber}
             onClick={() => setCurrentPage(pageNumber)}
-            className={`px-3 py-1 rounded-md ${ pageNumber === currentPage ? 'bg-[#33cfff] text-white' : '' }`}
+            className={`px-3 py-1 rounded-md ${ pageNumber === currentPage ? 'bg-accent text-white' : '' }`}
           >
             {pageNumber}
           </button>

@@ -30,7 +30,7 @@ const CollapseMenu = ({ navItems }: NavItemsProps) => {
   };
 
   return (
-    <div className='bg-main text-main'>
+    <div className=' text-main'>
       <button onClick={toggleMenu} className='flex items-center'>
         <span className='sr-only'>{'메뉴 열기'}</span>
         <Menu className='size-6' />
@@ -44,7 +44,7 @@ const CollapseMenu = ({ navItems }: NavItemsProps) => {
       />
 
       <div
-        className={`bg-main fixed right-0 top-0 z-50 h-full w-[70%] shadow-lg transition-transform duration-300 ${
+        className={` fixed right-0 top-0 z-50 h-full w-[70%] shadow-lg transition-transform duration-300 ${
           isRendered ? (isOpen ? 'translate-x-0' : 'translate-x-full') : 'translate-x-full'
         }`}
       >
