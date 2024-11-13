@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { TermData } from '@/types';
+import Stars from '@/components/server/ui/Stars';
 
 interface Props {
   termsData: TermData[];
@@ -31,10 +32,12 @@ export default function PaginationClient({ termsData, itemsPerPage }: Props) {
         <ul className='border-t border-gray-400'>
           {paginatedData.map((term) => (
             <li key={term.id}>
-              <Link href={term.url} className='w-full grid grid-cols-[2fr_7fr_1fr] py-5 border-b border-light hover:bg-background-secondary'>
-                <span className='font-noto ml-4'>{term.title.ko}</span>
-                <span className='text-sub'>{term.description.short}</span>
-                <span>{term.difficulty.level + 'stars'}</span>
+              <Link href={term.url} className='w-full grid grid-cols-[1fr_2fr] sm:grid-cols-[2fr_7fr_1fr] py-5 border-b border-light hover:bg-background-secondary'>
+                <span className='ml-4 flex w-full no-wrap'>{term.title.ko}</span>
+                <span className='text-sub truncate'>{term.description.short}</span>
+                <span className='hidden sm:flex mr-4 items-center'>
+                  <Stars rating={term.difficulty.level} size={16} />
+                </span>
               </Link>
             </li>
           ))}
