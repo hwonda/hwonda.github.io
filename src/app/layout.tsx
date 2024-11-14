@@ -26,7 +26,8 @@ const RootLayout = ({ children }: RootLayoutProps) => {
       >
         <ThemeProvider>
           <Header />
-          <main className='mt-16 max-w-6xl mx-auto px-4 py-3 md:px-6 lg:px-8'>{children}</main>
+          <main className='mt-16 max-w-6xl min-h-screen mx-auto px-4 py-3 md:px-6 lg:px-8'>{children}</main>
+          <div className='w-full flex justify-center pt-20 pb-10 text-sub'>{'© 2024 dxwiki All rights reserved.'}</div>
         </ThemeProvider>
       </body>
     </html>
