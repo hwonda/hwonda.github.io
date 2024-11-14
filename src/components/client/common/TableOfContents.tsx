@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface Section {
   id: string;
@@ -12,6 +12,7 @@ interface Props {
 }
 
 const HEADER_HEIGHT = 64;
+const Threshold = 10;
 
 const TableOfContents = ({ title }: Props) => {
   const [activeSection, setActiveSection] = useState<string>('');
@@ -50,8 +51,9 @@ const TableOfContents = ({ title }: Props) => {
 
         const { top: sectionTop, bottom: sectionBottom } = section.getBoundingClientRect();
         const headerLine = HEADER_HEIGHT;
+        const headerLineThreshold = headerLine + Threshold;
 
-        if (sectionTop <= headerLine && sectionBottom >= headerLine) {
+        if (sectionTop <= headerLineThreshold && sectionBottom >= headerLineThreshold) {
           const headingText = heading.textContent?.replace('#', '').trim() ?? '';
           setActiveSection(headingText);
         }
@@ -66,7 +68,7 @@ const TableOfContents = ({ title }: Props) => {
     };
   }, []);
 
-  const scrollToSection = (sectionId: string): void => {
+  const scrollToSection = useCallback((sectionId: string): void => {
     const sectionSelector = 'section h2';
     const sections = document.querySelectorAll<HTMLHeadingElement>(sectionSelector);
 
@@ -78,7 +80,7 @@ const TableOfContents = ({ title }: Props) => {
       const y = targetSection.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
-  };
+  }, []);
 
   return (
     <nav className="space-y-2 text-sm">
@@ -86,8 +88,8 @@ const TableOfContents = ({ title }: Props) => {
       {sections.map((section) => (
         <div
           key={section.id}
-          className={`cursor-pointer hover:text-primary transition-colors
-            ${ activeSection === section.text ? 'text-accent font-medium' : 'text-sub' }
+          className={`cursor-pointer hover:text-primary transition-colors underline underline-offset-4 decoration-light hover:decoration-primary
+            ${ activeSection === section.text ? 'text-accent font-medium decoration-primary' : 'text-sub' }
           `}
           onClick={() => scrollToSection(section.id)}
           role="button"

@@ -193,16 +193,22 @@ const PostDetail = async ({ slug }: Props) => {
                 </ul>
               </div>
             </section>
-            <div className="flex flex-wrap gap-1">
-              {term.tags.map((tag, index) => (
-                <button
-                  key={index}
-                  className="tag-button"
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
+            <section className="group">
+              <h2>
+                <span className="text-primary sm:ml-[-20px] mr-2 sm:opacity-0 group-hover:opacity-100 transition-opacity">{'#'}</span>
+                {'tags'}
+              </h2>
+              <div className="flex flex-wrap gap-1">
+                {term.tags.map((tag, index) => (
+                  <button
+                    key={index}
+                    className="tag-button"
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+            </section>
           </div>
           {/* <section className="group">
             <h2>
