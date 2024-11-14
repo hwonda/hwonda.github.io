@@ -37,7 +37,6 @@ const TableOfContents = ({ title }: Props) => {
         >= document.documentElement.scrollHeight - 10;
 
       if (isAtBottom && sectionElements.length > 0) {
-        // 페이지 하단에서는 마지막 섹션 활성화
         const lastSection = sectionElements[sectionElements.length - 1];
         const lastHeading = lastSection.querySelector('h2');
         const lastHeadingText = lastHeading?.textContent?.replace('#', '').trim() ?? '';
@@ -45,24 +44,20 @@ const TableOfContents = ({ title }: Props) => {
         return;
       }
 
-      // header 위치의 가로선과 겹치는 섹션 찾기
-      for (const section of sectionElements) {
+      Array.from(sectionElements).forEach((section) => {
         const heading = section.querySelector('h2');
-        if (!heading) continue;
+        if (!heading) return;
 
         const { top: sectionTop, bottom: sectionBottom } = section.getBoundingClientRect();
         const headerLine = HEADER_HEIGHT;
 
-        // 섹션이 header 위치의 가로선을 포함하고 있는지 확인
         if (sectionTop <= headerLine && sectionBottom >= headerLine) {
           const headingText = heading.textContent?.replace('#', '').trim() ?? '';
           setActiveSection(headingText);
-          break;
         }
-      }
+      });
     };
 
-    // 초기 활성 섹션 설정과 스크롤 이벤트 리스너 등록
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
 

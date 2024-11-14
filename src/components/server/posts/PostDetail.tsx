@@ -20,18 +20,18 @@ const PostDetail = async ({ slug }: Props) => {
 
   return (
     <div className='prose block md:grid md:grid-cols-[1fr_5fr]'>
-      <div className='sticky mt-24 top-[370px] h-32 hidden md:block'>
+      <div className='sticky mt-24 top-[382px] h-32 hidden md:block'>
         <TableOfContents title={term.title.ko} />
       </div>
       <div className='md:mr-40'>
-        <div className='flex items-end mt-20 border-b border-light'>
-          <div className='flex flex-col mb-1'>
+        <div className='flex items-end mt-32 border-b border-light'>
+          <div className='flex flex-col mb-2'>
             <h1 className="text-3xl font-bold text-main">{term.title.ko}</h1>
-            <span className="text-xl font-bold text-sub mb-6 font-noto">{term.title.en}</span>
+            <span className="text-xl font-bold text-sub mb-8 font-noto">{term.title.en}</span>
             <p>{term.description.short}</p>
           </div>
         </div>
-        <div className='flex flex-col sm:flex-row sm:justify-center items-end sm:items-center mt-5 gap-2'>
+        <div className='flex flex-col sm:flex-row sm:justify-start items-end sm:items-center mt-5 gap-2'>
           <div className="flex items-center gap-1">
             <span className=''>{'by '}{term.metadata.authors}</span>
             <span className="text-gray-400">{'•'}</span>

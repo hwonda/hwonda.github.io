@@ -12,13 +12,13 @@ const LogoAnimation = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [nextLogo, setNextLogo] = useState<LogoText>({ prefix: 'DxW', key: 1 });
 
-  const logos: LogoText[] = [
-    { prefix: 'DataW', key: 0 },
-    { prefix: 'DxW', key: 1 },
-    { prefix: 'D', key: 2 },
-  ];
-
   useEffect(() => {
+    const logos: LogoText[] = [
+      { prefix: 'DataW', key: 0 },
+      { prefix: 'DxW', key: 1 },
+      { prefix: 'D', key: 2 },
+    ];
+
     const interval = setInterval(() => {
       setIsAnimating(true);
 
@@ -37,21 +37,20 @@ const LogoAnimation = () => {
 
   return (
     <h1 className="flex text-3xl font-bold text-main">
-      <div className="relative flex justify-end overflow-hidden w-[7ch] h-[1.2em]">
+      <div className="relative flex justify-end overflow-hidden w-[7ch]">
         {/* 현재 텍스트 */}
         <span
-          className="absolute flex justify-end top-0 right-0 w-full text-accent"
+          className="absolute flex justify-end top-0 right-0 w-full text-primary"
           style={{
             animation: isAnimating ? 'slideDownOut 400ms ease-in-out forwards' : 'none',
           }}
         >
           {currentLogo.prefix}
         </span>
-
         {/* 다음 텍스트 */}
         {isAnimating && (
           <span
-            className="absolute flex justify-end top-0 right-0 w-full text-accent"
+            className="absolute flex justify-end top-0 right-0 w-full text-primary"
             style={{
               animation: 'slideDownIn 400ms ease-in-out forwards',
             }}
@@ -60,7 +59,7 @@ const LogoAnimation = () => {
           </span>
         )}
       </div>
-      <span>{'iki'}</span>
+      <span className='h-8'>{'iki'}</span>
 
       <style jsx>{`
         @keyframes slideDownOut {

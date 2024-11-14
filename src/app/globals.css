@@ -12,33 +12,29 @@ body {
 }
 
 :root {
-  --primary: #33cfff;
+  --primary: #0099cc;
   --secondary: #b9ddf1;
-  --accent: #0099CC;
-  
-  --background: #F8F8F8;
+  --accent: #0099cc;
+
+  --background: #f8f8f8;
   --background-secondary: #e0e9ed;
 
   --text: #333333;
   --text-secondary: #666666;
 
-  --border: #CCCCCC; /* 밝은 테마의 기본 테두리 색상 */
+  --border: #cccccc; /* 밝은 테마의 기본 테두리 색상 */
 }
 
 .dark {
   --primary: #33cfff;
   --secondary: #03537f;
-  --accent: #66A2B7;
-  
-  --background: #121212;
-  --background-secondary: #1E3A47;
+  --accent: #66a2b7;
 
-  --text: #E5E5E5;
-  --text-secondary: #B0B0B0;
+  --background: #121212;
+  --background-secondary: #1e3a47;
+
+  --text: #e5e5e5;
+  --text-secondary: #b0b0b0;
 
   --border: #666666; /* 다크 테마의 기본 테두리 색상 */
-}
-
-.text-primary {
-  color: var(--primary);
 }

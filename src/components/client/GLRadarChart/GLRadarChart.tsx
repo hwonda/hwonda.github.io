@@ -50,7 +50,7 @@ const lightLoadingStyle: RadarLoadingStyle = {
 };
 
 function GLRadarChart(props: RadarChartProps) {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
 
   const {
@@ -58,8 +58,8 @@ function GLRadarChart(props: RadarChartProps) {
     labelData,
     className,
     style,
-    chartStyle = theme === 'dark' ? darkChartStyle : lightChartStyle,
-    loadingStyle = theme === 'dark' ? darkLoadingStyle : lightLoadingStyle,
+    chartStyle = resolvedTheme === 'dark' ? darkChartStyle : lightChartStyle,
+    loadingStyle = resolvedTheme === 'dark' ? darkLoadingStyle : lightLoadingStyle,
     rotate,
     breathe,
     error,
