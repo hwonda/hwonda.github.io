@@ -18,12 +18,32 @@ const config: Config = {
         'main': 'var(--text)',
         'sub': 'var(--text-secondary)',
         'light': 'var(--border)',
+        'extreme-light': 'var(--extreme-light)',
       },
       fontFamily: {
         nanum: ['var(--font-nanum)', ...fontFamily.sans],
         coding: ['var(--font-coding)', ...fontFamily.mono],
         noto: ['var(--font-noto)', ...fontFamily.sans],
         pretendard: ['var(--font-pretendard)', ...fontFamily.sans],
+      },
+      keyframes: {
+        slideDown: {
+          '0%': { transform: 'translateY(-10%)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        slideDownIn: {
+          '0%': { transform: 'translateY(-100%)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        slideDownOut: {
+          '0%': { transform: 'translateY(0)', opacity: '1' },
+          '100%': { transform: 'translateY(100%)', opacity: '0' },
+        },
+      },
+      animation: {
+        slideDown: 'slideDown 0.3s ease-in-out',
+        slideDownOut: 'slideDownOut 400ms ease-in-out forwards',
+        slideDownIn: 'slideDownIn 400ms ease-in-out forwards',
       },
       typography: {
         DEFAULT: {
@@ -37,13 +57,22 @@ const config: Config = {
               color: 'var(--text-secondary)',
             },
             'ul, li': {
-              padding: 0,
-              margin: 0,
+              paddingLeft: '0.5rem',
+            },
+            'ul > li': {
+              borderLeft: '1px solid var(--background-secondary)',
             },
             p: {
               marginTop: '0',
               marginBottom: '0.75rem',
               lineHeight: '1.7',
+            },
+            section: {
+              marginTop: '10rem',
+              marginBottom: '10rem',
+              '& > *:not(h2, p)': {
+                paddingLeft: '0.5rem',
+              },
             },
 
             '.prose :where(h1):not(:where([class~="not-prose"],[class~="not-prose"] *))': {
@@ -51,7 +80,7 @@ const config: Config = {
               fontFamily: 'var(--font-noto)',
             },
             '.prose :where(h2):not(:where([class~="not-prose"],[class~="not-prose"] *))': {
-              marginTop: '6rem',
+              marginTop: '0',
               fontSize: '1.2rem',
               fontWeight: 'semibold',
               // fontFamily: 'var(--font-noto)',
@@ -67,22 +96,25 @@ const config: Config = {
             '.prose :where(a):not(:where([class~="not-prose"],[class~="not-prose"] *)):hover': {
               color: 'var(--accent)',
               textDecoration: 'underline',
+              textDecorationColor: 'var(--accent)',
+              textUnderlineOffset: '4px',
             },
             '.prose :where(ul > li):not(:where([class~="not-prose"],[class~="not-prose"] *))::marker':{
               color: 'var(--background)',
             },
             '.prose .tag-button': {
-              color: 'var(--background)',
-              backgroundColor: 'var(--accent)',
+              color: 'var(--text-secondary)',
+              border: '1px solid var(--border)',
               padding: '0.15rem 0.5rem',
-              borderRadius: '0.5rem',
+              borderRadius: '1rem',
               fontSize: '1rem',
               fontWeight: '600',
               cursor: 'pointer',
               marginRight: '0.25rem',
             },
             '.prose .tag-button:hover': {
-              backgroundColor: 'var(--primary)',
+              color: 'var(--text)',
+              backgroundColor: 'var(--border)',
             },
           },
         },

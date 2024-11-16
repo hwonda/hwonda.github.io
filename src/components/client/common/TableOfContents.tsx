@@ -83,7 +83,7 @@ const TableOfContents = ({ title }: Props) => {
   }, []);
 
   return (
-    <nav className="space-y-2 text-sm">
+    <nav className="space-y-2 text-sm min-w-32">
       <span className='text-main text-base font-bold'>{title}</span>
       {sections.map((section) => (
         <div
