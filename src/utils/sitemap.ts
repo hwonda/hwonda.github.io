@@ -4,7 +4,7 @@ import { fetchTermsData } from '@/utils/termsData';
 interface SitemapURL {
   loc: string;
   lastmod: string;
-  changefreq: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
+  changefreq: string;
   priority: number;
 }
 
