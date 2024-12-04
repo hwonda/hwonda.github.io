@@ -7,7 +7,6 @@
     "dev": "next dev --port 3000",
     "prebuild": "rimraf .next",
     "build": "next build",
-    "static": "ts-node -r tsconfig-paths/register --project tsconfig.node.json scripts/generate-sitemap.ts && ts-node -r tsconfig-paths/register --project tsconfig.node.json scripts/generate-robots.ts",
     "preexport": "rimraf out",
     "export": "next export",
     "touch": "touch out/.nojekyll",
