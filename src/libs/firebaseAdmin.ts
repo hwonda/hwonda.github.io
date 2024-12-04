@@ -1,7 +1,4 @@
 import admin, { ServiceAccount } from 'firebase-admin';
-import { config } from 'dotenv';
-
-config();
 
 const serviceAccount: ServiceAccount = {
   privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
