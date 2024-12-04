@@ -2,12 +2,13 @@ import { MetadataRoute } from 'next';
 import { dikiMetadata } from '@/constants';
 
 export default function robots(): MetadataRoute.Robots {
+  const siteUrl = dikiMetadata.url;
   return {
     rules: {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: `${ dikiMetadata.url }/sitemap.xml`,
-    host: dikiMetadata.url,
+    sitemap: `${ siteUrl }/sitemap.xml`,
+    host: siteUrl,
   };
 }
