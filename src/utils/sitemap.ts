@@ -1,14 +1,12 @@
-export interface SitemapURL {
+import { dikiMetadata } from '@/constants';
+import { fetchTermsData } from '@/utils/termsData';
+
+interface SitemapURL {
   loc: string;
   lastmod: string;
   changefreq: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
   priority: number;
 }
-
-// utils/sitemap.ts
-import { SitemapURL } from '@/types/sitemap';
-import { dikiMetadata } from '@/constants';
-import { fetchTermsData } from '@/utils/termsData';
 
 const encodeURL = (url: string): string => {
   return url.replace(/[&<>"']/g, (char) => {
