@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { dikiMetadata } from '@/constants';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: `${ process.env.SITE_URL }/sitemap.xml`,
-    host: process.env.SITE_URL,
+    sitemap: `${ dikiMetadata.url }/sitemap.xml`,
+    host: dikiMetadata.url,
   };
 }
