@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: `${process.env.SITE_URL}/sitemap.xml`,
+    sitemap: `${ process.env.SITE_URL }/sitemap.xml`,
     host: process.env.SITE_URL,
-  }
+  };
 }
