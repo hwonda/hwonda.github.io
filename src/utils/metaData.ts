@@ -1,10 +1,5 @@
-import dayjs from 'dayjs';
 import readingTime from 'reading-time';
 import { FetchTermData } from '@/types';
-
-const formatDate = (date: string): string => {
-  return dayjs(date).format('YY.MM.DD');
-};
 
 const getReadingTime = (term: FetchTermData) => {
   const allTextContent = `
@@ -26,4 +21,4 @@ const getReadingTime = (term: FetchTermData) => {
   return `${ minutes }분`;
 };
 
-export { formatDate, getReadingTime };
+export { getReadingTime };

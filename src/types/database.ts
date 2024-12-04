@@ -28,9 +28,12 @@ export interface FetchTermData {
     etc: string[];
     ko: string;
   };
-  tags: string[];
+  tags: Array<{
+    internal_link: string | null;
+    name: string;
+  }>;
   terms: Array<{
-    link: string;
+    internal_link: string | null;
     description: string;
     term: string;
   }>;
@@ -44,12 +47,12 @@ export interface FetchTermData {
   };
   references: {
     tutorials: Array<{
-      link: string;
+      external_link: string | null;
       platform: string;
       title: string;
     }>;
     books: Array<{
-      link: string;
+      external_link: string | null;
       isbn: string;
       authors: string[];
       publisher: string;
@@ -57,17 +60,17 @@ export interface FetchTermData {
       title: string;
     }>;
     academic: Array<{
-      link: string;
+      external_link: string | null;
       authors: string[];
       year: string;
       title: string;
       doi: string;
     }>;
     opensource: Array<{
+      external_link: string | null;
       name: string;
       license: string;
       description: string;
-      link: string;
     }>;
   };
   description: {

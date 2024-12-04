@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
-import { fontNanum, fontCoding, fontNoto, fontPretendard } from '@/lib/fonts';
+import { fontNanum, fontCoding, fontNoto, fontPretendard } from '@/libs/fonts';
 import './globals.css';
 import ThemeProvider from '@/layouts/ThemeProvider';
-import Header from '@/components/server/common/Header';
+import Header from '@/components/common/Header';
+import GoogleVerification from '@/components/meta/GoogleVerification';
+import GoogleAdSense from '@/components/meta/GoogleAdSense';
+import GoogleAnalytics from '@/components/meta/GoogleAnalytics';
 
 interface RootLayoutProps {
   readonly children: React.ReactNode;
@@ -16,6 +19,11 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang='en' suppressHydrationWarning>
+      <head>
+        <GoogleVerification />
+        <GoogleAdSense />
+        <GoogleAnalytics />
+      </head>
       <body
         className={`
         ${ fontNanum.variable } 

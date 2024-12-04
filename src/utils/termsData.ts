@@ -1,14 +1,19 @@
-import { firestore } from '@/lib/firebaseAdmin';
+import { firestore } from '@/libs/firebaseAdmin';
 import { TermData } from '@/types';
+import { transformToSlug } from '@/utils/filters';
 
 let cachedTermsData: TermData[] | null = null;
-let unsubscribe: (()=> void) | null = null;
 
-const subscribeToTermsData = (updateCallback: (data: TermData[])=> void) => {
-  unsubscribe = firestore.collection('terms').onSnapshot((snapshot) => {
-    cachedTermsData = snapshot.docs.map((doc) => {
+const fetchTermsData = async (): Promise<TermData[]> => {
+  if (cachedTermsData) {
+    return cachedTermsData;
+  }
+
+  try {
+    const termsCollection = await firestore.collection('terms').get();
+    cachedTermsData = termsCollection.docs.map((doc) => {
       const data = doc.data();
-      const urlPath = data.title.en.toLowerCase().replace(/\s+/g, '-');
+      const urlPath = transformToSlug(data.title.en);
       return {
         url: `/posts/${ urlPath }`,
         id: data.id,
@@ -24,36 +29,23 @@ const subscribeToTermsData = (updateCallback: (data: TermData[])=> void) => {
         description: data.description,
       } as TermData;
     });
-    updateCallback(cachedTermsData);
-  });
-};
-
-const fetchTermsData = async (): Promise<TermData[]> => {
-  if (cachedTermsData) {
-    return cachedTermsData;
+  } catch (error) {
+    console.error('Error fetching terms:', error);
+    cachedTermsData = [];
   }
 
-  return new Promise((resolve) => {
-    subscribeToTermsData((data) => {
-      cachedTermsData = data;
-      resolve(data);
-    });
-  });
+  return cachedTermsData;
 };
 
 const getTermData = async (slug: string): Promise<TermData | undefined> => {
   const termsDataList = await fetchTermsData();
   return termsDataList.find((term) =>
-    term.title.en.toLowerCase().replace(/\s+/g, '-') === slug
+    transformToSlug(term.title.en) === slug
   );
 };
 
 const clearCache = () => {
   cachedTermsData = null;
-  if (unsubscribe) {
-    unsubscribe();
-    unsubscribe = null;
-  }
 };
 
 export { fetchTermsData, getTermData, clearCache };

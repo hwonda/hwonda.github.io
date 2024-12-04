@@ -24,7 +24,8 @@ const config: Config = {
         nanum: ['var(--font-nanum)', ...fontFamily.sans],
         coding: ['var(--font-coding)', ...fontFamily.mono],
         noto: ['var(--font-noto)', ...fontFamily.sans],
-        pretendard: ['var(--font-pretendard)', ...fontFamily.sans],
+        // pretendard: ['var(--font-pretendard)', ...fontFamily.sans],
+        pretendard: ['Pretendard Variable', 'sans'],
       },
       keyframes: {
         slideDown: {
@@ -39,28 +40,27 @@ const config: Config = {
           '0%': { transform: 'translateY(0)', opacity: '1' },
           '100%': { transform: 'translateY(100%)', opacity: '0' },
         },
+        intro: {
+          '0%': { transform: 'translateY(5px)', opacity: '0' },
+          '100%': { transform: 'none', opacity: '1' },
+        },
       },
       animation: {
         slideDown: 'slideDown 0.3s ease-in-out',
         slideDownOut: 'slideDownOut 400ms ease-in-out forwards',
         slideDownIn: 'slideDownIn 400ms ease-in-out forwards',
+        intro: 'intro 500ms ease-in-out both',
+        introSecond: 'intro 1100ms ease-in-out both',
       },
       typography: {
         DEFAULT: {
           css: {
             maxWidth: 'none',
             'h1, h2, h3, strong': {
-              marginBottom: '0.5rem',
               color: 'var(--text)',
             },
             'p, span, li': {
               color: 'var(--text-secondary)',
-            },
-            'ul, li': {
-              paddingLeft: '0.5rem',
-            },
-            'ul > li': {
-              borderLeft: '1px solid var(--background-secondary)',
             },
             p: {
               marginTop: '0',
@@ -68,11 +68,8 @@ const config: Config = {
               lineHeight: '1.7',
             },
             section: {
-              marginTop: '10rem',
-              marginBottom: '10rem',
-              '& > *:not(h2, p)': {
-                paddingLeft: '0.5rem',
-              },
+              marginTop: '4rem',
+              marginBottom: '4rem',
             },
 
             '.prose :where(h1):not(:where([class~="not-prose"],[class~="not-prose"] *))': {
@@ -83,10 +80,12 @@ const config: Config = {
               marginTop: '0',
               fontSize: '1.2rem',
               fontWeight: 'semibold',
+              marginBottom: '1rem',
               // fontFamily: 'var(--font-noto)',
             },
             '.prose :where(h3):not(:where([class~="not-prose"],[class~="not-prose"] *))': {
               fontSize: '1.05rem',
+              marginBottom: '0.4rem',
             },
             '.prose :where(a):not(:where([class~="not-prose"],[class~="not-prose"] *))': {
               color: 'var(--accent)',
@@ -102,19 +101,22 @@ const config: Config = {
             '.prose :where(ul > li):not(:where([class~="not-prose"],[class~="not-prose"] *))::marker':{
               color: 'var(--background)',
             },
-            '.prose .tag-button': {
+            '.prose .tag-button, .tag-button-no-link': {
               color: 'var(--text-secondary)',
               border: '1px solid var(--border)',
-              padding: '0.15rem 0.5rem',
-              borderRadius: '1rem',
+              padding: '2px 7px 3px 8px',
+              borderRadius: '0.5rem',
               fontSize: '1rem',
               fontWeight: '600',
-              cursor: 'pointer',
               marginRight: '0.25rem',
             },
             '.prose .tag-button:hover': {
               color: 'var(--text)',
-              backgroundColor: 'var(--border)',
+              backgroundColor: 'var(--background-secondary)',
+              transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out',
+            },
+            '.markdown-text-sub p': {
+              marginBottom: '0',
             },
           },
         },
