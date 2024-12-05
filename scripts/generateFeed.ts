@@ -1,12 +1,12 @@
-// src/app/feed/page.tsx
-
-import { fetchTermsData } from '@/utils/termsData'; // 데이터 가져오는 함수
-import { dikiMetadata } from '@/constants';
+import fs from 'fs';
+import path from 'path';
+import { fetchTermsData } from '@/utils/termsData'; // 데이터를 가져오는 함수 (경로는 실제 파일에 맞게 수정)
 import RSS from 'rss';
-import { TermData } from '@/types/database';
+import { dikiMetadata } from '@/constants';
+import { TermData } from '@/types/database'; // TermData 타입 (타입 정의가 필요)
 
-export default async function FeedPage() {
-  // 포스트 데이터를 서버에서 직접 가져옵니다.
+const generateFeed = async (): Promise<void> => {
+  // fetchTermsData 함수에서 TermData[] 배열을 반환한다고 가정
   const postLists: TermData[] = await fetchTermsData();
   const metadata = dikiMetadata;
 
@@ -22,12 +22,12 @@ export default async function FeedPage() {
     ttl: 60, // 60분마다 업데이트
   });
 
-  // 포스트들을 RSS 항목으로 추가
+  // 각 포스트를 RSS 항목으로 추가
   postLists.forEach((post) => {
     feed.item({
       title: post.title.ko, // 한국어 제목
       description: post.description.short, // 짧은 설명
-      url: metadata.url + post.url, // 포스트 URL
+      url: metadata.url + post.url, // 포스트의 URL
       guid: post.url, // GUID (URL)
       categories: post.usecase.industries, // 산업 카테고리
       author: post.metadata.authors.join(', '), // 저자
@@ -35,14 +35,16 @@ export default async function FeedPage() {
     });
   });
 
-  // XML 문자열 생성
+  // RSS XML 생성
   const xml = feed.xml({ indent: true });
 
-  // RSS XML을 반환합니다.
-  return (
-    <div>
-      <h1>{'RSS Feed'}</h1>
-      <pre>{xml}</pre>
-    </div>
-  );
-}
+  // `public/feed.xml` 파일에 RSS 저장
+  const feedPath = path.join(process.cwd(), 'public', 'feed.xml');
+  fs.writeFileSync(feedPath, xml, 'utf8');
+  console.log('RSS feed generated successfully at:', feedPath);
+};
+
+// 실행
+generateFeed().catch((error) => {
+  console.error('Error generating feed:', error);
+});
