@@ -80,7 +80,7 @@ jobs:
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Generate feed.xml
-        run: node ./scripts/generateFeed.ts
+        run: ${{ steps.detect-package-manager.outputs.runner }} run feed
       - name: Disable Jekyll
         run: touch ./out/.nojekyll
       - name: Upload artifact
