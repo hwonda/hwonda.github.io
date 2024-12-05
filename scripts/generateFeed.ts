@@ -4,7 +4,7 @@ import RSS from 'rss';
 import { dikiMetadata } from '@/constants';
 import { TermData } from '@/types/database'; // TermData 타입 (타입 정의가 필요)
 
-(async () => {
+(async() => {
   const generateFeed = async (): Promise<void> => {
     // fetchTermsData 함수에서 TermData[] 배열을 반환한다고 가정
     const postLists: TermData[] = await fetchTermsData();
@@ -24,12 +24,9 @@ import { TermData } from '@/types/database'; // TermData 타입 (타입 정의�
 
     // 각 포스트를 RSS 항목으로 추가
     postLists.forEach((post) => {
-      // description에 HTML 태그를 포함하려면 CDATA로 감싸기
-      const descriptionWithHtml = `<![CDATA[${ post.description.short } ${ post.description.full }]]>`;
-
       feed.item({
         title: post.title.ko, // 한국어 제목
-        description: descriptionWithHtml, // HTML 태그 포함된 설명
+        description: post.description.short + post.description.full, // 짧은 설명
         url: metadata.url + post.url, // 포스트의 URL
         guid: metadata.url + post.url, // GUID (URL)
         categories: post.usecase.industries, // 산업 카테고리
