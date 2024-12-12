@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import ScrollDirectionHandler from '@/components/common/ScrollDirectionHandler';
 import ThemeSwitch from '@/components/theme/ThemeSwitch';
+import { Send } from 'lucide-react';
 
 const Header = () => {
   const pathname = usePathname();
@@ -17,13 +18,18 @@ const Header = () => {
           <div className='w-full flex justify-end items-center gap-3'>
             {!isHomePage && (
               <Link href='/'>
-                <span className='h-full flex items-center text-3xl font-bold'>
+                <span className='h-8 flex items-center text-3xl font-bold'>
                   <span className='text-primary'>{'D'}</span>
                   {'iki'}
                 </span>
               </Link>
             )}
-            <ThemeSwitch />
+            <div className='flex items-center gap-1'>
+              <Link href='/contact' className='rounded-md p-2 hover:bg-background-secondary duration-300'>
+                <Send className='size-4' />
+              </Link>
+              <ThemeSwitch />
+            </div>
           </div>
         </div>
       </header>

@@ -1,16 +1,18 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Search, Lightbulb } from 'lucide-react';
-
+import { Search, Filter } from 'lucide-react';
+import SearchTip from '@/components/search/SearchTip';
 interface SearchInputProps {
   suggestions?: string[];
   tip?: boolean;
+  filter?: boolean;
 }
 
-const SearchInput = ({ suggestions, tip = true }: SearchInputProps) => {
+const SearchInput = ({ suggestions, tip = true, filter = false }: SearchInputProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isFilterActive, setIsFilterActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const filteredSuggestions = suggestions?.filter((suggestion) =>
@@ -60,43 +62,25 @@ const SearchInput = ({ suggestions, tip = true }: SearchInputProps) => {
           onKeyDown={(e) => redirect(e, searchTerm)}
           className="w-full p-2 pl-3 bg-background outline-none text-main rounded-md"
         />
+        {filter && (
+          <button
+            onClick={() => setIsFilterActive(!isFilterActive)}
+            className={`group flex items-center gap-1 w-16 mr-2 pl-2 py-0.5 rounded-sm shrink-0 text-sub hover:text-primary ${
+              isFilterActive ? 'bg-accent text-white hover:text-white' : ''
+            }`}
+          >
+            <Filter className='size-4' />
+            <span className=''>{'필터'}</span>
+          </button>
+        )}
       </div>
-      {tip && (
-        <div className="w-full flex flex-col bg-extreme-light text-sub rounded-xl mt-4 p-4 gap-3">
-          <span className="flex items-center text-main gap-2">
-            <Lightbulb className="size-5" />
-            {'검색 팁'}
-          </span>
-          <div className='hidden sm:block'>
-            <span className="flex flex-wrap items-center gap-1 sm:gap-1 ml-6">
-              <span className="flex items-center gap-1">
-                <span className="border border-light p-[3px_8px_2px_7px] rounded-md">{'Ctrl'}</span>
-                <span className="font-semibold">{'+'}</span>
-                <span className="border border-light px-2.5 py-0.5 pt-[3px] rounded-md">{'K'}</span>
-              </span>
-              <span className="text-sub sm:mx-1">{'또는'}</span>
-              <span className="flex items-center gap-1">
-                <span className="border border-light px-3.5 pt-0.5 rounded-md text-sub text-[18px]">
-                  {'⌘'}
-                </span>
-                <span className="font-semibold">{'+'}</span>
-                <span className="border border-light px-2.5 py-0.5 pt-[3px] rounded-md">{'K'}</span>
-              </span>
-              <span className="block mt-2 sm:mt-0 text-sub">
-                {'를 눌러 검색창에 직접 이동할 수 있습니다.'}
-              </span>
-            </span>
-          </div>
-
-          <div className='ml-6'>
-            <strong>{'용어'}</strong>
-            {'나 '}
-            <strong>{'설명'}</strong>
-            {' 외에도'}
-            <strong>{'사용 사례, 관련 자료'}</strong>
-            {' 또한 검색할 수 있습니다.'}
-          </div>
+      {filter && (
+        <div className={`opacity-0 text-sub mt-2 ${ isFilterActive ? 'opacity-100' : '' }`}>
+          {'필터:'}
         </div>
+      )}
+      {tip && (
+        <SearchTip />
       )}
       {isModalOpen && (
         <div

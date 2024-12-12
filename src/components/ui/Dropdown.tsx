@@ -49,7 +49,7 @@ const DropdownList = ({
   return isOpen ? (
     <div
       ref={contentRef}
-      className={`absolute flex flex-col p-1 z-50 mt-2 min-w-36 rounded-lg bg-background border border-secondary shadow-lg ring-1 ring-black/5 transition duration-200 ease-out ${
+      className={`animate-slideDown absolute flex flex-col p-1 z-50 mt-2 min-w-36 rounded-lg bg-background border border-secondary shadow-lg ring-1 ring-black/5 transition duration-200 ease-out ${
         align === 'end' ? 'right-0' : 'left-0'
       }`}
       onClick={close} // 메뉴 아이템 클릭 시 메뉴를 닫기 위해 사용

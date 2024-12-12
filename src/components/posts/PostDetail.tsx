@@ -25,12 +25,12 @@ const PostDetail = async ({ term, slug }: Props) => {
             description={term.difficulty.description}
           />
           <DescriptionSection description={term.description.full} />
+          <RelatedTermsSection terms={term.terms} />
           <RelevanceSection
             analyst={term.relevance.analyst}
             engineer={term.relevance.engineer}
             scientist={term.relevance.scientist}
           />
-          <RelatedTermsSection terms={term.terms} />
           <UsecaseSection usecase={term.usecase} />
           <ReferencesSection references={term.references} />
         </div>

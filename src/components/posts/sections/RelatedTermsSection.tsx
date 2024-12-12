@@ -1,6 +1,9 @@
+'use client';
+
 import Link from 'next/link';
 import { Link as LinkIcon } from 'lucide-react';
 import { transformToSlug } from '@/utils/filters';
+import { Fragment } from 'react';
 
 interface RelatedTerm {
   terms: Array<{
@@ -17,27 +20,29 @@ const RelatedTermsSection = ({ terms }: RelatedTerm) => {
         <span className="text-primary sm:ml-[-20px] mr-2.5 sm:opacity-0 group-hover:opacity-100 transition-opacity">{'#'}</span>
         {'관련용어'}
       </h2>
-      {terms.map((item, index) => (
-        item.internal_link ? (
-          <div key={index} className='flex items-start gap-0.5 mb-2'>
-            <Link
-              href={transformToSlug(item.internal_link)}
-              className='group flex shrink-0 items-center gap-1 tag-button rounded-3xl text-sm hover:no-underline'
-            >
-              <span>{item.term}</span>
-              <LinkIcon size={16} />
-            </Link>
-            <span>{item.description}</span>
-          </div>
-        ) : (
-          <div className='flex items-start mb-2 gap-1.5' key={index}>
-            <span key={index} className='tag-button-no-link flex shrink-0 rounded-3xl text-sm bg-extreme-light'>
-              {item.term}
-            </span>
-            <span>{item.description}</span>
-          </div>
-        )
-      ))}
+      <div className="grid grid-cols-[auto_1fr] items-start gap-x-1.5">
+        {terms.map((item, index) => (
+          item.internal_link ? (
+            <Fragment key={index}>
+              <Link
+                href={transformToSlug(item.internal_link)}
+                className='group flex shrink-0 justify-center items-center gap-1 tag-button rounded-3xl text-sm hover:no-underline'
+              >
+                <span>{item.term}</span>
+                <LinkIcon size={16} />
+              </Link>
+              <span className="mb-2">{item.description}</span>
+            </Fragment>
+          ) : (
+            <Fragment key={index}>
+              <span className='tag-button-no-link flex justify-center shrink-0 rounded-3xl text-sm bg-extreme-light'>
+                {item.term}
+              </span>
+              <span className="mb-2">{item.description}</span>
+            </Fragment>
+          )
+        ))}
+      </div>
     </section>
   );
 };

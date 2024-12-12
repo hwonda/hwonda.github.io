@@ -32,7 +32,7 @@ const PostHeader = ({ term, slug }: PostHeaderProps) => {
           <span>{formatDate(term.metadata.updated_at)}{' 수정'}</span>
         </div>
       </div>
-      <div className="flex justify-start items-center flex-wrap mt-2.5">
+      <div className="flex justify-start items-center flex-wrap mt-2.5 gap-1">
         {term.tags.map((tag, index) => (
           tag.internal_link ? (
             <Link href={transformToSlug(tag.internal_link)} key={index} className='group flex gap-1 items-center tag-button rounded-3xl text-sm mb-2 hover:no-underline'>

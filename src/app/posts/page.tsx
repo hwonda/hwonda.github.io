@@ -1,25 +1,29 @@
 import { fetchTermsData } from '@/utils/termsData';
 import Pagination from '@/components/posts/Pagination';
-import { TermData } from '@/types';
+// import { TermData } from '@/types/database';
 import SearchInput from '@/components/common/SearchInput';
+
+export const metadata = {
+  title: '포스트 목록',
+};
 
 export default async function PostsPage() {
   const termsData = await fetchTermsData();
-  const extendedTermsData = Array.from({ length: 122 }, (data: TermData, i) => ({
-    ...termsData[0],
-    id: i + 1,
-  }));
+  // const extendedTermsData = Array.from({ length: 122 }, (data: TermData, i) => ({
+  //   ...termsData[0],
+  //   id: i + 1,
+  // }));
 
   const itemsPerPage = 12;
-  const totalPages = Math.ceil(extendedTermsData.length / itemsPerPage);
+  const totalPages = Math.ceil(termsData.length / itemsPerPage);
 
   return (
-    <div>
-      <div className='animate-intro'>
-        <SearchInput tip={false} />
+    <div className="relative">
+      <div className='animate-intro relative z-20 sm:mx-24'>
+        <SearchInput tip={false} filter={true} />
       </div>
-      <div className='animate-introSecond'>
-        <h1 className='flex justify-end items-center gap-2 mt-10 mb-5 pb-2 text-sub border-b border-extreme-light'>
+      <div className='animate-introSecond z-10'>
+        <h1 className='flex justify-start items-center gap-2 mt-4 md:mt-20 mb-5 pb-1 text-sub border-b border-extreme-light'>
           {'검색결과'}
           <span className='text-primary font-bold'>{termsData.length}</span>
           {'/ '}{termsData.length}{' 개'}

@@ -31,6 +31,10 @@ const TableOfContents = ({ title }: Props) => {
 
     setSections(sectionData);
 
+    if (sectionData.length > 0) {
+      setActiveSection(sectionData[0].text);
+    }
+
     const handleScroll = () => {
       // 페이지 하단 도달 감지
       const isAtBottom
@@ -84,7 +88,7 @@ const TableOfContents = ({ title }: Props) => {
 
   return (
     <div className='animate-introSecond flex flex-col'>
-      <div className='h-[455px] hidden md:block' />
+      <div className='h-[425px] hidden md:block' />
       <div className='sticky top-[132px] h-32 hidden md:block'>
         <nav className="space-y-2 text-sm min-w-32">
           <span className='text-main text-base font-bold'>{title}</span>
