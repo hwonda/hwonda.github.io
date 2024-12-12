@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: dikiMetadata.thumbnailURL,
+        url: 'https://hwonda.github.io/thumbnail.png',
         width: 1200,
         height: 630,
         alt: dikiMetadata.description,
