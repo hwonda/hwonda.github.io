@@ -6,6 +6,7 @@ import RelevanceSection from './sections/RelevanceSection';
 import RelatedTermsSection from './sections/RelatedTermsSection';
 import UsecaseSection from './sections/UsecaseSection';
 import ReferencesSection from './sections/ReferencesSection';
+import RecommendationSection from './sections/RecommendationSection';
 import { TermData } from '@/types/database';
 
 interface Props {
@@ -33,6 +34,7 @@ const PostDetail = async ({ term, slug }: Props) => {
           />
           <UsecaseSection usecase={term.usecase} />
           <ReferencesSection references={term.references} />
+          <RecommendationSection />
         </div>
       </div>
     </div>
