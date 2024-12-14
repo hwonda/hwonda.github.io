@@ -1,7 +1,7 @@
 // /post/[slug]/page.tsx
 import PostDetail from '@/components/posts/PostDetail';
-import { fetchTermsData } from '@/utils/termsData';
-import { getTermData } from '@/utils/termsData';
+import { fetchTermsData } from '@/utils/termsJson';
+import { getTermData } from '@/utils/termsJson';
 import { notFound } from 'next/navigation';
 import { dikiMetadata } from '@/constants';
 import { Metadata } from 'next';

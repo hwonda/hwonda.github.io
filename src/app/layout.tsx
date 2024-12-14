@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { fontNanum, fontCoding, fontNoto, fontPretendard } from '@/libs/fonts';
+import { fontNanum, fontCoding, fontNoto } from '@/libs/fonts';
 import './globals.css';
 import ThemeProvider from '@/layouts/ThemeProvider';
 import Header from '@/components/common/Header';
@@ -60,7 +60,6 @@ const RootLayout = ({ children }: RootLayoutProps) => {
         ${ fontNanum.variable } 
         ${ fontCoding.variable } 
         ${ fontNoto.variable } 
-        ${ fontPretendard.variable }
       `}
       >
         <ThemeProvider>

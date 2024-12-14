@@ -1,4 +1,4 @@
-import { fetchTermsData } from '@/utils/termsData';
+import { fetchTermsData } from '@/utils/termsJson';
 import PostList from '@/components/posts/PostList';
 // import { TermData } from '@/types/database';
 import SearchInput from '@/components/common/SearchInput';

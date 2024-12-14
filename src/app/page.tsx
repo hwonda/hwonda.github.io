@@ -1,7 +1,7 @@
 import LogoAnimation from '@/components/common/LogoAnimation';
 import SearchInput from '@/components/common/SearchInput';
 import RecommendTerms from '@/components/posts/RecommendTerms';
-import { fetchTermsData } from '@/utils/termsData';
+import { fetchTermsData } from '@/utils/termsJson';
 
 export default async function Home() {
   const terms = await fetchTermsData();

@@ -1,5 +1,5 @@
 import PostCard from '@/components/posts/PostCard';
-import { fetchTermsData } from '@/utils/termsData';
+import { fetchTermsData } from '@/utils/termsJson';
 
 const RecommendationSection = async () => {
   const terms = await fetchTermsData();

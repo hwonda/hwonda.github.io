@@ -79,6 +79,8 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Generate feed.xml
         run: npm run feed
+      - name: Generate terms.json
+        run: npm run terms
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Disable Jekyll

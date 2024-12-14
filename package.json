@@ -16,7 +16,8 @@
     "lint:fix": "eslint --fix ./src",
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore .",
-    "feed": "ts-node -r tsconfig-paths/register --project tsconfig.node.json scripts/generateFeed.ts"
+    "feed": "ts-node -r tsconfig-paths/register --project tsconfig.node.json scripts/generateFeed.ts",
+    "terms": "ts-node -r tsconfig-paths/register --project tsconfig.node.json scripts/generateTermsJson.ts"
   },
   "dependencies": {
     "next": "14.2.13",
