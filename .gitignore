@@ -221,3 +221,5 @@ tests.*
 env.local
 secret_key.json
 service-account.json
+
+/data/terms.json
