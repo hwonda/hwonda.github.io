@@ -9,22 +9,22 @@
 
 body {
   background-color: var(--background);
-  font-weight: 450;
+  font-weight: 400;
 }
 
 :root {
   --primary: #0099cc;
   --secondary: #b9ddf1;
-  --accent: #0099cc;
+  --accent: #0080ab;
 
   --background: #f8f8f8;
   --background-secondary: #e0e9ed;
 
   --text: rgb(5, 5, 5);
   --text-secondary: rgb(24, 24, 24);
-
+  
+  --gray1: rgb(100, 100, 100);
   --border: #cccccc; /* 밝은 테마의 기본 테두리 색상 */
-
   --extreme-light: #efefef;
 }
 
@@ -39,8 +39,8 @@ body {
   --text: rgb(251, 251, 251);
   --text-secondary: rgb(226, 226, 226);
 
+  --gray1: rgb(155, 155, 155);
   --border: #666666; /* 다크 테마의 기본 테두리 색상 */
-
   --extreme-light: #1f1f1f;
 }
 

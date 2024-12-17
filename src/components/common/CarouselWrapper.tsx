@@ -8,7 +8,7 @@ interface CarouselClientWrapperProps {
   itemWidth: number;
 }
 
-const revolveSpeed = 0.75; // 1.5px/s
+const revolveSpeed = 0.25; // 0.5px/s
 
 const CarouseltWrapper = ({ children, itemWidth }: CarouselClientWrapperProps) => {
   const [time, setTime] = useState(0);

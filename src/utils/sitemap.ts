@@ -60,12 +60,17 @@ export const getSitemapURLs = async (): Promise<SitemapURL[]> => {
       changefreq: 'always',
       priority: 0.9,
     },
-    ...postLists.map(({ url, metadata }) => ({
-      loc: `${ baseUrl }${ url }`,
-      lastmod: new Date(metadata.updated_at).toISOString(),
-      changefreq: 'always',
-      priority: 0.8,
-    })),
+    ...postLists.map(({ url, metadata }) => {
+      const date = metadata?.updated_at || metadata?.created_at;
+      const lastmod = date ? new Date(date) : new Date();
+
+      return {
+        loc: `${ baseUrl }${ url }`,
+        lastmod: lastmod.toISOString(),
+        changefreq: 'always',
+        priority: 0.8,
+      };
+    }),
   ];
 
   return urls;

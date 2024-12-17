@@ -1,14 +1,13 @@
 import MarkdownContent from '../MarkdownContent';
+import { Usecase } from '@/types';
 
 interface UsecaseSectionProps {
-  usecase: {
-    industries: string[],
-    example: string,
-    description: string
-  }
+  usecase: Usecase
 }
 
 const UsecaseSection = ({ usecase }: UsecaseSectionProps) => {
+  if((!usecase.industries || usecase.industries.length === 0) && !usecase.example && !usecase.description) return null;
+
   return (
     <section className="group">
       <h2>
@@ -16,7 +15,7 @@ const UsecaseSection = ({ usecase }: UsecaseSectionProps) => {
         {'사용사례'}
       </h2>
       <div className="flex flex-wrap gap-1 mb-3">
-        {usecase.industries.map((tag, index) => (
+        {usecase.industries?.map((tag, index) => (
           <span
             key={index}
             className="tag-button-no-link bg-extreme-light text-sm mb-1"
@@ -25,8 +24,8 @@ const UsecaseSection = ({ usecase }: UsecaseSectionProps) => {
           </span>
         ))}
       </div>
-      <MarkdownContent content={usecase.example} />
-      <MarkdownContent content={usecase.description} />
+      <MarkdownContent content={usecase.example ?? ''} />
+      <MarkdownContent content={usecase.description ?? ''} />
     </section>
   );
 };

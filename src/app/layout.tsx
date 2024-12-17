@@ -57,15 +57,16 @@ const RootLayout = ({ children }: RootLayoutProps) => {
       </head>
       <body
         className={`
-        ${ fontNanum.variable } 
-        ${ fontCoding.variable } 
-        ${ fontNoto.variable } 
-      `}
+          overflow-x-hidden overflow-y-auto
+          ${ fontNanum.variable } 
+          ${ fontCoding.variable } 
+          ${ fontNoto.variable } 
+        `}
       >
         <ThemeProvider>
           <Header />
           <main className='mt-16 max-w-6xl min-h-[calc(100vh_-150px)] mx-auto px-4 py-3 md:px-6 lg:px-8'>{children}</main>
-          <div className='w-full h-20 flex justify-center items-center text-sub'>{'© 2024 dxwiki All rights reserved.'}</div>
+          <div className='w-full h-20 flex justify-center items-center text-gray1 text-sm'>{'© 2024 dxwiki All rights reserved.'}</div>
         </ThemeProvider>
       </body>
     </html>

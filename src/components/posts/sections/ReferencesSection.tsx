@@ -1,42 +1,16 @@
 import Link from 'next/link';
+import { References } from '@/types';
 
 interface ReferencesSectionProps {
-  references: {
-    tutorials: Array<{
-      external_link: string | null;
-      platform: string;
-      title: string;
-    }>;
-    books: Array<{
-      external_link: string | null;
-      isbn: string;
-      authors: string[];
-      publisher: string;
-      year: string;
-      title: string;
-    }>;
-    academic: Array<{
-      external_link: string | null;
-      authors: string[];
-      year: string;
-      title: string;
-      doi: string;
-    }>;
-    opensource: Array<{
-      external_link: string | null;
-      name: string;
-      license: string;
-      description: string;
-    }>;
-  };
+  references: References;
 }
 
 const ReferencesSection = ({ references }: ReferencesSectionProps) => {
   const isEmpty
-   = references.tutorials.length === 0
-   && references.books.length === 0
-   && references.academic.length === 0
-   && references.opensource.length === 0;
+   = references.tutorials?.length === 0
+   && references.books?.length === 0
+   && references.academic?.length === 0
+   && references.opensource?.length === 0;
 
   if (isEmpty) return null;
 
@@ -55,14 +29,18 @@ const ReferencesSection = ({ references }: ReferencesSectionProps) => {
     };
   };
 
-  const formatTutorialDetails = (tutorial: typeof references.tutorials[0]) => {
+  type Tutorial = NonNullable<typeof references.tutorials>[number];
+
+  const formatTutorialDetails = (tutorial: Tutorial) => {
     return tutorial.platform || '';
   };
 
-  const formatBookDetails = (book: typeof references.books[0]) => {
+  type Book = NonNullable<typeof references.books>[number];
+
+  const formatBookDetails = (book: Book) => {
     const parts = [];
 
-    if (book.authors.length > 0) {
+    if (book.authors && book.authors.length > 0) {
       parts.push(book.authors.join(', '));
     }
 
@@ -77,11 +55,13 @@ const ReferencesSection = ({ references }: ReferencesSectionProps) => {
     return [parts.join(' '), book.isbn ? `ISBN: ${ book.isbn }` : null].filter(Boolean);
   };
 
-  const formatAcademicDetails = (paper: typeof references.academic[0]) => {
+  type Academic = NonNullable<typeof references.academic>[number];
+
+  const formatAcademicDetails = (paper: Academic) => {
     const parts = [];
 
     const authorYear = [];
-    if (paper.authors.length > 0) {
+    if (paper.authors && paper.authors.length > 0) {
       authorYear.push(paper.authors.join(', '));
     }
     if (paper.year) {
@@ -98,7 +78,9 @@ const ReferencesSection = ({ references }: ReferencesSectionProps) => {
     return parts;
   };
 
-  const formatOpenSourceDetails = (project: typeof references.opensource[0]) => {
+  type OpenSource = NonNullable<typeof references.opensource>[number];
+
+  const formatOpenSourceDetails = (project: OpenSource) => {
     const parts = [];
 
     if (project.description) {
@@ -118,16 +100,16 @@ const ReferencesSection = ({ references }: ReferencesSectionProps) => {
         {'레퍼런스'}
       </h2>
       <div className='grid lg:grid-cols-2 gap-4 sm:mt-[-4px]'>
-        {references.tutorials.length > 0 && (
+        {references.tutorials && references.tutorials.length > 0 && (
           <div className='flex flex-col'>
-            <strong className='ml-2 mb-1.5'>{'Tutorials'}</strong>
+            <strong className='ml-1 mb-1.5'>{'Tutorials'}</strong>
             {references.tutorials.map((tutorial, index) => (
               <Link
-                {...getLinkProps(tutorial.external_link)}
+                {...getLinkProps(tutorial.external_link ?? null)}
                 key={index}
-                className={`group flex flex-col gap-1 border border-light flex-1 px-2.5 py-1 lg:px-3 lg:py-2 rounded-lg hover:bg-background-secondary no-underline ${ index > 0 ? 'mt-2' : '' } ${ !tutorial.external_link ? 'cursor-default' : '' }`}
+                className={`ml-1 group flex flex-col justify-center gap-1 border border-light flex-1 px-2.5 py-1 lg:px-3 lg:py-2 rounded-lg hover:bg-background-secondary no-underline ${ index > 0 ? 'mt-2' : '' } ${ !tutorial.external_link ? 'cursor-default' : '' }`}
               >
-                <span className='text-accent group-hover:underline'>{tutorial.title}</span>
+                <span className='text-primary group-hover:underline'>{tutorial.title}</span>
                 {formatTutorialDetails(tutorial) && (
                   <span className='text-sm font-medium'>
                     {formatTutorialDetails(tutorial)}
@@ -137,16 +119,16 @@ const ReferencesSection = ({ references }: ReferencesSectionProps) => {
             ))}
           </div>
         )}
-        {references.books.length > 0 && (
+        {references.books && references.books.length > 0 && (
           <div className='flex flex-col'>
-            <strong className='ml-2 mb-1.5'>{'Books'}</strong>
+            <strong className='ml-1 mb-1.5'>{'Books'}</strong>
             {references.books.map((book, index) => (
               <Link
-                {...getLinkProps(book.external_link)}
+                {...getLinkProps(book.external_link ?? null)}
                 key={index}
-                className={`group flex flex-col gap-1 border border-light flex-1 px-2.5 py-1 lg:px-3 lg:py-2 rounded-lg hover:bg-background-secondary no-underline ${ index > 0 ? 'mt-2' : '' } ${ !book.external_link ? 'cursor-default' : '' }`}
+                className={`ml-1 group flex flex-col justify-center gap-1 border border-light flex-1 px-2.5 py-1 lg:px-3 lg:py-2 rounded-lg hover:bg-background-secondary no-underline ${ index > 0 ? 'mt-2' : '' } ${ !book.external_link ? 'cursor-default' : '' }`}
               >
-                <span className='text-accent group-hover:underline'>{book.title}</span>
+                <span className='text-primary group-hover:underline'>{book.title}</span>
                 {formatBookDetails(book).map((detail, i) => (
                   <span key={i} className='text-sm font-medium'>{detail}</span>
                 ))}
@@ -154,16 +136,16 @@ const ReferencesSection = ({ references }: ReferencesSectionProps) => {
             ))}
           </div>
         )}
-        {references.academic.length > 0 && (
+        {references.academic && references.academic.length > 0 && (
           <div className='flex flex-col'>
-            <strong className='ml-2 mb-1.5'>{'Academic'}</strong>
+            <strong className='ml-1 mb-1.5'>{'Academic'}</strong>
             {references.academic.map((paper, index) => (
               <Link
-                {...getLinkProps(paper.external_link)}
+                {...getLinkProps(paper.external_link ?? null)}
                 key={index}
-                className={`group flex flex-col gap-1 border border-light flex-1 px-2.5 py-1 lg:px-3 lg:py-2 rounded-lg hover:bg-background-secondary no-underline ${ index > 0 ? 'mt-2' : '' } ${ !paper.external_link ? 'cursor-default' : '' }`}
+                className={`ml-1 group flex flex-col justify-center gap-1 border border-light flex-1 px-2.5 py-1 lg:px-3 lg:py-2 rounded-lg hover:bg-background-secondary no-underline ${ index > 0 ? 'mt-2' : '' } ${ !paper.external_link ? 'cursor-default' : '' }`}
               >
-                <span className='text-accent group-hover:underline'>{paper.title}</span>
+                <span className='text-primary group-hover:underline'>{paper.title}</span>
                 {formatAcademicDetails(paper).map((detail, i) => (
                   <span key={i} className='text-sm font-medium'>{detail}</span>
                 ))}
@@ -171,16 +153,16 @@ const ReferencesSection = ({ references }: ReferencesSectionProps) => {
             ))}
           </div>
         )}
-        {references.opensource.length > 0 && (
+        {references.opensource && references.opensource.length > 0 && (
           <div className='flex flex-col'>
-            <strong className='ml-2 mb-1.5'>{'Open Source'}</strong>
+            <strong className='ml-1 mb-1.5'>{'Open Source'}</strong>
             {references.opensource.map((project, index) => (
               <Link
-                {...getLinkProps(project.external_link)}
+                {...getLinkProps(project.external_link ?? null)}
                 key={index}
-                className={`group flex flex-col gap-1 border border-light flex-1 px-2.5 py-1 lg:px-3 lg:py-2 rounded-lg hover:bg-background-secondary no-underline ${ index > 0 ? 'mt-2' : '' } ${ !project.external_link ? 'cursor-default' : '' }`}
+                className={`ml-1 group flex flex-col justify-center gap-1 border border-light flex-1 px-2.5 py-1 lg:px-3 lg:py-2 rounded-lg hover:bg-background-secondary no-underline ${ index > 0 ? 'mt-2' : '' } ${ !project.external_link ? 'cursor-default' : '' }`}
               >
-                <span className='text-accent group-hover:underline'>{project.name}</span>
+                <span className='text-primary group-hover:underline'>{project.name}</span>
                 {formatOpenSourceDetails(project).map((detail, i) => (
                   <span key={i} className='text-sm font-medium'>{detail}</span>
                 ))}

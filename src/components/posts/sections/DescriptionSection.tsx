@@ -5,6 +5,7 @@ interface DescriptionSectionProps {
 }
 
 const DescriptionSection = ({ description }: DescriptionSectionProps) => {
+  if(!description) return null;
   return (
     <section className='group mt-10'>
       <h2 className='flex items-center'>

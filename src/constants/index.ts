@@ -1,6 +1,6 @@
 export const dikiMetadata = {
-  title: '디키',
-  description: '데이터 백과사전 - 디키(Diki)',
+  title: 'Diki',
+  description: '데이터 위키 - Diki',
   url: 'https://dxwiki.github.io',
   thumbnailURL: 'https://dxwiki.github.io/thumbnail.png',
   author: {

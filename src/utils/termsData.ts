@@ -40,7 +40,7 @@ const fetchTermsData = async (): Promise<TermData[]> => {
 const getTermData = async (slug: string): Promise<TermData | undefined> => {
   const termsDataList = await fetchTermsData();
   return termsDataList.find((term) =>
-    transformToSlug(term.title.en) === slug
+    transformToSlug(term.title?.en ?? '') === slug
   );
 };
 

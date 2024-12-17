@@ -1,19 +1,24 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Search, Filter } from 'lucide-react';
+import { Search, Filter, CircleHelp } from 'lucide-react';
 import SearchTip from '@/components/search/SearchTip';
+
 interface SearchInputProps {
   suggestions?: string[];
   tip?: boolean;
   filter?: boolean;
+  termsLength?: number;
 }
 
-const SearchInput = ({ suggestions, tip = true, filter = false }: SearchInputProps) => {
+const SearchInput = ({ suggestions, tip = true, filter = false, termsLength }: SearchInputProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [isFilterActive, setIsFilterActive] = useState(false);
+  const [showTip, setShowTip] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const placeholder = termsLength ? `${ termsLength }개의 데이터 용어사전` : '검색어 입력해주세요';
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
 
   const filteredSuggestions = suggestions?.filter((suggestion) =>
     suggestion.toLowerCase().includes(searchTerm.toLowerCase())
@@ -32,6 +37,15 @@ const SearchInput = ({ suggestions, tip = true, filter = false }: SearchInputPro
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     if (!e.relatedTarget || !(e.relatedTarget as HTMLElement).closest('.suggestions-modal')) {
       setIsModalOpen(false);
@@ -47,21 +61,37 @@ const SearchInput = ({ suggestions, tip = true, filter = false }: SearchInputPro
     }
   };
 
+  const handleTipClick = () => {
+    if (windowWidth < 640) {
+      setShowTip(!showTip);
+    }
+  };
+
   return (
-    <div className="relative w-full z-[1]">
+    <div className="relative w-full">
       <div className="flex items-center border border-light rounded-md focus-within:border-accent bg-background">
         <Search className="ml-3 text-main" />
         <input
           type="text"
           ref={inputRef}
           value={searchTerm}
-          placeholder="검색어를 입력하세요"
+          placeholder={placeholder}
           onChange={(e) => setSearchTerm(e.target.value)}
           onFocus={() => setIsModalOpen(true)}
           onBlur={handleBlur}
           onKeyDown={(e) => redirect(e, searchTerm)}
           className="w-full p-2 pl-3 bg-background outline-none text-main rounded-md"
         />
+        {tip && (
+          <button
+            className={`${ showTip ? 'text-primary' : 'text-light' } group flex items-center mr-3 hover:text-accent`}
+            onClick={handleTipClick}
+            onMouseEnter={() => windowWidth >= 640 && setShowTip(true)}
+            onMouseLeave={() => windowWidth >= 640 && setShowTip(false)}
+          >
+            <CircleHelp className="size-5" />
+          </button>
+        )}
         {filter && (
           <button
             onClick={() => setIsFilterActive(!isFilterActive)}
@@ -79,8 +109,10 @@ const SearchInput = ({ suggestions, tip = true, filter = false }: SearchInputPro
           {'필터:'}
         </div>
       )}
-      {tip && (
-        <SearchTip />
+      {showTip && (
+        <div className='w-full absolute top-[40px] right-0 animate-slideDown'>
+          <SearchTip />
+        </div>
       )}
       {isModalOpen && (
         <div

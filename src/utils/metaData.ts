@@ -3,17 +3,13 @@ import { FetchTermData } from '@/types';
 
 const getReadingTime = (term: FetchTermData) => {
   const allTextContent = `
-    ${ term.description.full }
-    ${ term.difficulty.description }
-    ${ term.relevance.analyst.description }
-    ${ term.relevance.engineer.description }
-    ${ term.relevance.scientist.description }
-    ${ term.usecase.example }
-    ${ term.usecase.description }
-    ${ term.references.tutorials.map((t) => t.title).join(' ') }
-    ${ term.references.books.map((b) => b.title).join(' ') }
-    ${ term.references.academic.map((a) => a.title).join(' ') }
-    ${ term.references.opensource.map((o) => o.name).join(' ') }
+    ${ term.description?.full ? term.description.full : '' }
+    ${ term.difficulty && term.difficulty.description ? term.difficulty.description : '' }
+    ${ term.relevance?.analyst?.description ? term.relevance.analyst.description : '' }
+    ${ term.relevance?.engineer?.description ? term.relevance.engineer.description : '' }
+    ${ term.relevance?.scientist?.description ? term.relevance.scientist.description : '' }
+    ${ term.usecase && term.usecase.example ? term.usecase.example : '' }
+    ${ term.usecase && term.usecase.description ? term.usecase.description : '' }
   `;
 
   const stats = readingTime(allTextContent);

@@ -95,8 +95,8 @@ const TableOfContents = ({ title }: Props) => {
           {sections.map((section) => (
             <div
               key={section.id}
-              className={`cursor-pointer hover:text-primary transition-colors underline underline-offset-4 decoration-light hover:decoration-primary
-                  ${ activeSection === section.text ? 'text-accent font-medium decoration-primary' : 'text-sub' }
+              className={`cursor-pointer transition-colors underline underline-offset-4 decoration-light hover:text-accent hover:decoration-accent
+                  ${ activeSection === section.text ? 'text-primary font-medium decoration-primary' : 'text-sub' }
                 `}
               onClick={() => scrollToSection(section.id)}
               role="button"

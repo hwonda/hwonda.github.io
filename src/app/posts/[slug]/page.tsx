@@ -1,7 +1,7 @@
 // /post/[slug]/page.tsx
 import PostDetail from '@/components/posts/PostDetail';
-import { fetchTermsData } from '@/utils/termsJson';
-import { getTermData } from '@/utils/termsJson';
+import { fetchTermsData } from '@/utils/termsData';
+import { getTermData } from '@/utils/termsData';
 import { notFound } from 'next/navigation';
 import { dikiMetadata } from '@/constants';
 import { Metadata } from 'next';
@@ -15,7 +15,7 @@ export const dynamicParams = false;
 export async function generateStaticParams() {
   const termsData = await fetchTermsData();
   return termsData.map((term) => ({
-    slug: term.title.en.toLowerCase().replace(/\s+/g, '_'),
+    slug: term.title?.en?.toLowerCase().replace(/\s+/g, '_') ?? 'not-found',
   }));
 }
 
@@ -26,15 +26,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {};
   }
 
-  const title = `${ term.title.ko } (${ term.title.en })`;
-  const description = term.description.short;
+  const title = `${ term.title?.ko }${ term.title?.en ? `(${ term.title.en })` : '' }`;
+  const description = term.description?.short;
 
   return {
     title: title,
     description: description,
     openGraph: {
       title: title,
-      description: description,
+      description: description ?? '',
       url: `${ dikiMetadata.url }/posts/${ params.slug }`,
       siteName: dikiMetadata.title,
       locale: 'ko_KR',
@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitter: {
       card: 'summary_large_image',
       title: title,
-      description: description,
+      description: description ?? '',
       images: [dikiMetadata.thumbnailURL],
     },
   };

@@ -29,9 +29,7 @@ export const initializeGL = (chart: HTMLCanvasElement, vert: string, frag: strin
   gl.compileShader(vertexShader);
   gl.compileShader(fragmentShader);
 
-  const program = gl.createProgram();
-  if (!program) throw new Error('Failed to create program');
-
+  const program = gl.createProgram()!;
   gl.attachShader(program, vertexShader);
   gl.attachShader(program, fragmentShader);
   gl.linkProgram(program);

@@ -1,84 +1,94 @@
+export interface Title {
+  en?: string;
+  etc?: string[];
+  ko?: string;
+}
+export interface Description {
+  full?: string;
+  short?: string;
+}
+export interface Metadata {
+  contributors?: string[];
+  authors?: string[];
+  updated_at?: string;
+  last_reviewed?: string;
+  created_at?: string;
+}
+export interface Tags {
+  internal_link?: string;
+  name?: string;
+}
+export interface Difficulty {
+  description?: string;
+  level?: number;
+}
+export interface Relevance {
+  analyst?: {
+    score?: number;
+    description?: string;
+  };
+  engineer?: {
+    score?: number;
+    description?: string;
+  };
+  scientist?: {
+    score?: number;
+    description?: string;
+  };
+}
+export interface Terms {
+  internal_link?: string;
+  description?: string;
+  term?: string;
+}
+export interface Usecase {
+  example?: string;
+  description?: string;
+  industries?: string[];
+}
+export interface References {
+  tutorials: Array<{
+    external_link?: string;
+    platform?: string;
+    title?: string;
+  }> | undefined;
+  books: Array<{
+    external_link?: string;
+    isbn?: string;
+    authors?: string[];
+    publisher?: string;
+    year?: string;
+    title?: string;
+  }> | undefined;
+  academic: Array<{
+    external_link?: string;
+    authors?: string[];
+    year?: string;
+    title?: string;
+    doi?: string;
+  }> | undefined;
+  opensource: Array<{
+    external_link?: string;
+    name?: string;
+    license?: string;
+    description?: string;
+  }> | undefined;
+}
+
 export interface FetchTermData {
-  id: number;
-  usecase: {
-    example: string;
-    description: string;
-    industries: string[];
-  };
-  relevance: {
-    analyst: {
-      score: number;
-      description: string;
-    };
-    engineer: {
-      score: number;
-      description: string;
-    };
-    scientist: {
-      score: number;
-      description: string;
-    };
-  };
-  difficulty: {
-    description: string;
-    level: number;
-  };
-  title: {
-    en: string;
-    etc: string[];
-    ko: string;
-  };
-  tags: Array<{
-    internal_link: string | null;
-    name: string;
-  }>;
-  terms: Array<{
-    internal_link: string | null;
-    description: string;
-    term: string;
-  }>;
-  publish: boolean;
-  metadata: {
-    contributors: string[];
-    authors: string[];
-    updated_at: string;
-    last_reviewed: string;
-    created_at: string;
-  };
-  references: {
-    tutorials: Array<{
-      external_link: string | null;
-      platform: string;
-      title: string;
-    }>;
-    books: Array<{
-      external_link: string | null;
-      isbn: string;
-      authors: string[];
-      publisher: string;
-      year: string;
-      title: string;
-    }>;
-    academic: Array<{
-      external_link: string | null;
-      authors: string[];
-      year: string;
-      title: string;
-      doi: string;
-    }>;
-    opensource: Array<{
-      external_link: string | null;
-      name: string;
-      license: string;
-      description: string;
-    }>;
-  };
-  description: {
-    full: string;
-    short: string;
-  };
+  title?: Title;
+  description?: Description;
+  metadata?: Metadata;
+  tags?: Tags[];
+  difficulty?: Difficulty;
+  relevance?: Relevance;
+  terms?: Terms[];
+  usecase?: Usecase;
+  references?: References;
 }
 
 export interface TermData extends FetchTermData {
-  url: string;
+  id?: number;
+  publish?: boolean;
+  url?: string;
 }

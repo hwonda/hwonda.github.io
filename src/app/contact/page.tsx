@@ -1,7 +1,7 @@
 
 const ContactPage = () => {
   return (
-    <div>
+    <div className="h-screen">
       <h1>{'Contact'}</h1>
     </div>
   );

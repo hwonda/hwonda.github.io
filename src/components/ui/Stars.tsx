@@ -15,7 +15,7 @@ const Stars = ({ rating, size = 20 }: StarsProps) => {
           key={i}
           size={size}
           fill={i < rating ? 'var(--primary)' : 'transparent'}
-          className={i < rating ? 'text-accent dark:text-primary' : 'text-light'} // rating에 따라 채워진 별과 빈 별의 스타일 적용
+          className={i < rating ? 'text-primary' : 'text-light'} // rating에 따라 채워진 별과 빈 별의 스타일 적용
         />
       ))}
     </div>
