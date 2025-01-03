@@ -3,16 +3,20 @@
 const isProd = process.env.NODE_ENV === 'production';
 
 const nextConfig = {
-  ...(isProd && { output: 'export' }), // 배포 환경에서만 'export' 설정 적용
+  ...(isProd && {
+    output: 'export', // 배포 환경에서 정적 사이트 생성
+    basePath: '/repository-name', // GitHub Pages의 리포지토리 이름으로 변경
+    assetPrefix: '/repository-name', // 정적 파일 경로
+  }),
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.module.rules.push(
       {
         test: /\.(frag|vert)$/,
-        // This is the asset module.
+        // Asset module for shader files
         type: 'asset/source',
       }
-    )
-    return config
+    );
+    return config;
   },
 };
 
