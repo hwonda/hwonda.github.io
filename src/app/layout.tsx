@@ -54,6 +54,10 @@ const RootLayout = ({ children }: RootLayoutProps) => {
         <GoogleVerification />
         <GoogleAdSense />
         <GoogleAnalytics />
+        <meta
+          name="google-site-verification"
+          content="IvRh4cnrlBoqcniXnKIWq_aDj41S2xiwVrng89cvzww"
+        />
       </head>
       <body
         className={`
