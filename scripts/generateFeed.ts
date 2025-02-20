@@ -39,7 +39,7 @@ import { TermData } from '@/types'; // TermData 타입 (타입 정의가 필요)
     const xml = feed.xml({ indent: true });
 
     // `public/feed.xml` 파일에 RSS 저장
-    await fs.writeFile('public/feed.xml', xml);
+    await fs.writeFile('out/feed.xml', xml);
     console.log('RSS feed generated');
   };
 
