@@ -10,7 +10,7 @@ const generateItemXML = (post: TermData, metadata: typeof dikiMetadata): string 
   return `
     <item>
       <title>${ sanitizeText(post.title?.ko ?? '') }${ sanitizeText(post.title?.en ?? '') }${ sanitizeText(post.title?.etc?.[0] ?? '') }</title>
-      <description><![CDATA[${ sanitizeText(description) }]]></description>
+      <description>${ sanitizeText(description) }</description>
       <link>${ metadata.url }${ post.url }</link>
       <guid>${ metadata.url }${ post.url }</guid>
       ${ (post.usecase?.industries ?? []).map((category) => `<category>${ sanitizeText(category) }</category>`).join('') }
