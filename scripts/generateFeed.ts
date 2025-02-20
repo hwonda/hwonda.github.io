@@ -4,14 +4,17 @@ import { dikiMetadata } from '@/constants';
 import { TermData } from '@/types';
 
 const generateItemXML = (post: TermData, metadata: typeof dikiMetadata): string => {
+  const sanitizeText = (text: string) => text.replace(/<[^>]*>/g, '');
+  const description = (post.description?.short ?? '') + (post.description?.full ?? '');
+
   return `
     <item>
-      <title>${ post.title?.ko ?? '' }</title>
-      <description>${ (post.description?.short ?? '') + (post.description?.full ?? '') }</description>
+      <title>${ sanitizeText(post.title?.ko ?? '') }${ sanitizeText(post.title?.en ?? '') }${ sanitizeText(post.title?.etc ?? '') }</title>
+      <description><![CDATA[${ sanitizeText(description) }]]></description>
       <link>${ metadata.url }${ post.url }</link>
       <guid>${ metadata.url }${ post.url }</guid>
-      ${ (post.usecase?.industries ?? []).map((category) => `<category>${ category }</category>`).join('') }
-      <author>${ post.metadata?.authors?.join(', ') ?? '' }</author>
+      ${ (post.usecase?.industries ?? []).map((category) => `<category>${ sanitizeText(category) }</category>`).join('') }
+      <author>${ sanitizeText(post.metadata?.authors?.join(', ') ?? '') }</author>
       <pubDate>${ new Date(post.metadata?.updated_at ?? post.metadata?.created_at ?? '').toUTCString() }</pubDate>
     </item>
   `;
