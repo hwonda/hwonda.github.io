@@ -12,7 +12,7 @@ const generateItemXML = (post: TermData, metadata: typeof dikiMetadata): string 
       <title>${ sanitizeText(post.title?.ko ?? '') }${ sanitizeText(post.title?.en ?? '') }${ sanitizeText(post.title?.etc?.[0] ?? '') }</title>
       <description>${ sanitizeText(description) }</description>
       <link>${ metadata.url }${ post.url }</link>
-      <guid>${ metadata.url }${ post.url }</guid>
+      <guid isPermaLink="true">${ metadata.url }${ post.url }</guid>
       ${ (post.usecase?.industries ?? []).map((category) => `<category>${ sanitizeText(category) }</category>`).join('') }
       <author>${ sanitizeText(post.metadata?.authors?.join(', ') ?? '') }</author>
       <pubDate>${ new Date(post.metadata?.updated_at ?? post.metadata?.created_at ?? '').toUTCString() }</pubDate>
