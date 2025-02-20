@@ -85,10 +85,11 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
-      - name: Generate feed.xml
-        run: npm run feed
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
+      # Build 후에 static 파일들 생성
+      - name: Generate static files
+        run: npm run static
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
