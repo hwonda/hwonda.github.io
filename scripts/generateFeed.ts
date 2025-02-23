@@ -39,7 +39,7 @@ const generateFeedXML = (posts: TermData[], metadata: typeof dikiMetadata): stri
   try {
     const postLists = await fetchTermsData();
     const xml = generateFeedXML(postLists, dikiMetadata);
-    await fs.writeFile('out/feed.xml', xml);
+    await fs.writeFile('public/feed.xml', xml);
     console.log('RSS feed generated');
   } catch (error) {
     console.error('Error generating feed:', error);

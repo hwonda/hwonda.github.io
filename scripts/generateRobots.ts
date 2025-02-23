@@ -12,6 +12,6 @@ import { dikiMetadata } from '../src/constants';
     return text;
   };
 
-  fs.writeFile('out/robots.txt', createRobotsTxt(), 'utf-8');
+  fs.writeFile('public/robots.txt', createRobotsTxt(), 'utf-8');
   console.log('robots.txt generated');
 })();
