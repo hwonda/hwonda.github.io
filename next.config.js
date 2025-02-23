@@ -3,9 +3,10 @@
 const isProd = process.env.NODE_ENV === 'production';
 
 const nextConfig = {
-  ...(isProd && {
-    output: 'export', // 배포 환경에서 정적 사이트 생성
-  }),
+  output: 'standalone',
+  images: {
+    unoptimized: true,
+  },
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.module.rules.push(
       {
