@@ -64,6 +64,6 @@ const generateSitemapXML = (urls: SitemapURL[]): string => {
   const urls = await getSitemapURLs();
   const sitemap = generateSitemapXML(urls);
 
-  await fs.writeFile('public/sitemap.xml', sitemap);
+  await fs.writeFile('out/sitemap.xml', sitemap);
   console.log('sitemap.xml generated in public directory');
 })();
