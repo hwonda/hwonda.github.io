@@ -223,3 +223,6 @@ secret_key.json
 service-account.json
 
 /data/terms.json
+
+/public/feed.xml
+/public/sitemap.xml
