@@ -1,35 +1,18 @@
-// /** @type {import('next').NextConfig} */
-
-// const isProd = process.env.NODE_ENV === 'production';
-
-// const nextConfig = {
-//   output: 'standalone',
-//   images: {
-//     unoptimized: true,
-//   },
-//   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-//     config.module.rules.push(
-//       {
-//         test: /\.(frag|vert)$/,
-//         // Asset module for shader files
-//         type: 'asset/source',
-//       }
-//     );
-//     return config;
-//   },
-// };
-
-// module.exports = nextConfig;
-
 /** @type {import('next').NextConfig} */
+
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-  experimental: {
-    fontLoaders: [{ loader: '@next/font/google', options: { subsets: ['latin'] } }],
-  },
-  images: {
-    unoptimized: true,
+  ...(isProd && { output: 'export' }), // 배포 환경에서만 'export' 설정 적용
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    config.module.rules.push(
+      {
+        test: /\.(frag|vert)$/,
+        // This is the asset module.
+        type: 'asset/source',
+      }
+    )
+    return config
   },
 };
 

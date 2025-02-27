@@ -1,12 +1,19 @@
 import type { Config } from 'tailwindcss';
 import { fontFamily } from 'tailwindcss/defaultTheme';
 import typography from '@tailwindcss/typography';
+import plugin from 'tailwindcss/plugin';
 
 const config: Config = {
   darkMode: ['class'],
   content: ['./src/**/*.{ts,tsx,mdx}'],
   prefix: '',
-  plugins: [typography],
+  plugins: [
+    typography,
+    plugin(({ addVariant }: { addVariant: (name: string, rules: string)=> void }) => {
+      addVariant('windows', '.windows &');
+      addVariant('mac', '.mac &');
+    }),
+  ],
   theme: {
     extend: {
       colors: {
@@ -17,15 +24,25 @@ const config: Config = {
         'accent': 'var(--accent)',
         'main': 'var(--text)',
         'sub': 'var(--text-secondary)',
+        'gray0': 'var(--gray0)',
+        'gray1': 'var(--gray1)',
+        'gray2': 'var(--gray2)',
+        'gray3': 'var(--gray3)',
+        'gray4': 'var(--gray4)',
+        'gray5': 'var(--gray5)',
         'light': 'var(--border)',
         'extreme-light': 'var(--extreme-light)',
+        'level-1': 'var(--level-1)',
+        'level-2': 'var(--level-2)',
+        'level-3': 'var(--level-3)',
+        'level-4': 'var(--level-4)',
+        'level-5': 'var(--level-5)',
       },
       fontFamily: {
         nanum: ['var(--font-nanum)', ...fontFamily.sans],
         coding: ['var(--font-coding)', ...fontFamily.mono],
         noto: ['var(--font-noto)', ...fontFamily.sans],
-        // pretendard: ['var(--font-pretendard)', ...fontFamily.sans],
-        pretendard: ['Pretendard Variable', 'sans'],
+        pretendard: ['Pretendard Variable', ...fontFamily.sans],
       },
       keyframes: {
         slideDown: {
@@ -98,30 +115,76 @@ const config: Config = {
               textDecorationColor: 'var(--accent)',
               textUnderlineOffset: '4px',
             },
-            '.prose :where(ul > li):not(:where([class~="not-prose"],[class~="not-prose"] *))::marker':{
-              color: 'var(--background)',
-            },
             '.prose .tag-button, .tag-button-no-link': {
               color: 'var(--text-secondary)',
               border: '1px solid var(--border)',
               padding: '2px 7px 3px 8px',
               borderRadius: '0.5rem',
               fontSize: '1rem',
-              fontWeight: '600',
               marginRight: '0.25rem',
-            },
-            '.prose .tag-button:hover': {
-              color: 'var(--text)',
-              backgroundColor: 'var(--background-secondary)',
-              transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out',
             },
             '.markdown-text-sub p': {
               marginBottom: '0',
+            },
+            '.prose code': {
+              padding: '0.25rem 0.4rem',
+              borderRadius: '0.25rem',
+              color: 'var(--primary)',
+              backgroundColor: 'var(--gray4)',
+              fontFamily: 'var(--font-pretendard)',
+            },
+            '.prose code::before': {
+              display: 'none',
+            },
+            '.prose code::after': {
+              display: 'none',
+            },
+            '.prose ol, .prose ul': {
+              margin: '0.4rem 0',
+            },
+            '.prose :where(ol > li)::marker, .prose :where(ul > li)::marker': {
+              color: 'var(--gray1)',
+            },
+            '.prose .list-decimal, .prose .list-disc': {
+              margin: '0.2rem 0',
+              paddingLeft: '0.2rem',
+            },
+            '.markdown-math-block': {
+              color: 'var(--text) !important',
+            },
+            '.markdown-math-inline': {
+              color: 'var(--text) !important',
+            },
+            '.br-gap': {
+              marginBottom: '0.75rem',
+            },
+            '.prose .MJX-TEX': {
+              paddingRight: '0.05rem !important',
+            },
+            '.prose .MathJax': {
+              top: '0.1rem !important',
+              paddingRight: '0.05rem !important',
+            },
+            '.prose mjx-c.mjx-c30::before': {
+              paddingRight: '0.7rem !important',
             },
           },
         },
       },
     },
   },
+  safelist: [
+    'text-level-1',
+    'text-level-2',
+    'text-level-3',
+    'text-level-4',
+    'text-level-5',
+    'border-level-1',
+    'border-level-2',
+    'border-level-3',
+    'border-level-4',
+    'border-level-5',
+  ],
+
 };
 export default config;

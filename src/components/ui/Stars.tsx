@@ -5,11 +5,12 @@ import { Star } from 'lucide-react';
 interface StarsProps {
   rating: number;
   size?: number;
+  className?: string;
 }
 
-const Stars = ({ rating, size = 20 }: StarsProps) => {
+const Stars = ({ rating, size = 20, className }: StarsProps) => {
   return (
-    <div className='flex wrap gap-1'>
+    <div className={`flex wrap gap-1 ${ className }`}>
       {Array.from({ length: 5 }, (_, i) => (
         <Star
           key={i}

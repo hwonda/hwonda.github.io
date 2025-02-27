@@ -22,10 +22,22 @@ body {
 
   --text: rgb(5, 5, 5);
   --text-secondary: rgb(24, 24, 24);
-  
-  --gray1: rgb(100, 100, 100);
+
+  --gray0: rgb(55, 55, 55);
+  --gray1: rgb(95, 95, 95);
+  --gray2: rgb(120, 120, 120);
+  --gray3: rgb(170, 170, 170);
+  --gray4: rgb(230, 230, 230);
+  --gray5: rgb(240, 240, 240);
+
   --border: #cccccc; /* 밝은 테마의 기본 테두리 색상 */
   --extreme-light: #efefef;
+
+  --level-1: #1a75db;
+  --level-2: #00ab52;
+  --level-3: #e6ac00;
+  --level-4: #e66000;
+  --level-5: #e60000;
 }
 
 .dark {
@@ -34,14 +46,26 @@ body {
   --accent: #66a2b7;
 
   --background: #121212;
-  --background-secondary: #10242c;
+  --background-secondary: #1e3e4b;
 
   --text: rgb(251, 251, 251);
   --text-secondary: rgb(226, 226, 226);
 
-  --gray1: rgb(155, 155, 155);
+  --gray0: rgb(200, 200, 200);
+  --gray1: rgb(165, 165, 165);
+  --gray2: rgb(120, 120, 120);
+  --gray3: rgb(80, 80, 80);
+  --gray4: rgb(50, 50, 50);
+  --gray5: rgb(30, 30, 30);
+
   --border: #666666; /* 다크 테마의 기본 테두리 색상 */
   --extreme-light: #1f1f1f;
+
+  --level-1: #3b82f6;
+  --level-2: #4ade80;
+  --level-3: #facc15;
+  --level-4: #fb923c;
+  --level-5: #f87171;
 }
 
 @layer base {
@@ -80,4 +104,8 @@ body {
   ::-webkit-resizer {
     display: none;
   }
+}
+
+.group-section:hover .group-section-title {
+  opacity: 1;
 }

@@ -1,33 +1,52 @@
 'use client';
 
-import Link from 'next/link';
+import { useCallback } from 'react';
 import { TermData } from '@/types';
 import { formatDate } from '@/utils/filters';
-import { Link as LinkIcon } from 'lucide-react';
-import { transformToSlug } from '@/utils/filters';
-
+import DifficultyLevel from './DifficultyLevel';
+import Level from '@/components/ui/Level';
+import TooltipButton from '@/components/ui/TooltipButton';
+import { Share2 } from 'lucide-react';
 interface PostHeaderProps {
   term: TermData
-  slug: string
+  onShare: ()=> void;
 }
 
-const PostHeader = ({ term, slug }: PostHeaderProps) => {
+const PostHeader = ({ term, onShare }: PostHeaderProps) => {
+  const handleShareClick = useCallback((): void => {
+    onShare();
+  }, [onShare]);
+
   return (
     <div className='animate-intro sm:ml-5'>
-      <div className='flex sm:justify-start mt-10 sm:mt-32'>
-        <div className='flex flex-col justify-center items-center'>
-          <h1 className="text-3xl font-bold mb-0">
-            <span className='block sm:inline text-main'>{term.title?.ko}</span>
+      <div className='mt-10 sm:mt-32'>
+        <div className="flex">
+          <span className="flex flex-wrap items-center text-3xl font-bold mb-0">
+            <span className='text-main'>{term.title?.ko}</span>
             {
               term.title?.en && (
-                <span className='block sm:inline text-main'>{'('}{term.title.en}{')'}</span>
+                <span className='text-main break-all'>{'('}{term.title.en}{')'}
+                  <button
+                    onClick={handleShareClick}
+                  >
+                    <Share2 className='block md:hidden size-5 ml-1 text-gray1 hover:text-primary' />
+                  </button>
+
+                </span>
               )
             }
-          </h1>
+            <span className='inline-flex items-center' />
+            <TooltipButton
+              onClick={handleShareClick}
+              tooltip="공유하기"
+              className='hidden md:block text-gray1 hover:text-primary ml-1.5'
+            >
+              <Share2 className='size-6' />
+            </TooltipButton>
+          </span>
         </div>
       </div>
-      <p className='my-1'>{term.description?.short}</p>
-      <div className='flex justify-start gap-1 text-xs'>
+      <div className='flex justify-start gap-1 text-xs my-2'>
         <span className='text-main'>{term.metadata?.authors ?? '작가 확인 안됨'}</span>
         <span className="text-light">{'•'}</span>
         <div className='flex gap-1 items-center'>
@@ -46,20 +65,16 @@ const PostHeader = ({ term, slug }: PostHeaderProps) => {
           )}
         </div>
       </div>
-      <div className="flex justify-start items-center flex-wrap mt-2.5 gap-1">
-        {term.tags?.map((tag, index) => (
-          tag.internal_link ? (
-            <Link href={transformToSlug(tag.internal_link)} key={index} className='group flex gap-1 items-center tag-button rounded-3xl text-sm mb-2 hover:no-underline'>
-              {tag.name}
-              {transformToSlug(tag.internal_link) === slug ? <span className='sm:hidden group-hover:block text-sub'>{'• 현재글'}</span> : <LinkIcon size={16} />}
-            </Link>
-          ) : (
-            <span key={index} className='tag-button-no-link rounded-3xl text-sm mb-2 bg-extreme-light'>
-              {tag.name}
-            </span>
-          )
-        ))}
+      <div className='flex items-start gap-2 my-1'>
+        <div>
+          <Level level={0} />
+        </div>
+        <p className='my-0.5'>{term.description?.short}</p>
       </div>
+      <DifficultyLevel
+        level={term.difficulty?.level ?? 0}
+        description={term.difficulty?.description ?? ''}
+      />
     </div>
   );
 };

@@ -1,6 +1,9 @@
 'use client';
 
+import Link from 'next/link';
 import { useState, useEffect, useCallback } from 'react';
+import { TermData, Tags } from '@/types';
+import { transformToSlug } from '@/utils/filters';
 
 interface Section {
   id: string;
@@ -9,12 +12,15 @@ interface Section {
 
 interface Props {
   title: string;
+  // onShare: ()=> void;
+  term: TermData;
+  slug: string;
 }
 
 const HEADER_HEIGHT = 64;
 const Threshold = 10;
 
-const TableOfContents = ({ title }: Props) => {
+const TableOfContents = ({ title, term }: Props) => {
   const [activeSection, setActiveSection] = useState<string>('');
   const [sections, setSections] = useState<Section[]>([]);
 
@@ -37,11 +43,11 @@ const TableOfContents = ({ title }: Props) => {
 
     const handleScroll = () => {
       // 페이지 하단 도달 감지
-      const isAtBottom
+      const bottomReached
         = window.innerHeight + window.scrollY
         >= document.documentElement.scrollHeight - 10;
 
-      if (isAtBottom && sectionElements.length > 0) {
+      if (bottomReached && sectionElements.length > 0) {
         const lastSection = sectionElements[sectionElements.length - 1];
         const lastHeading = lastSection.querySelector('h2');
         const lastHeadingText = lastHeading?.textContent?.replace('#', '').trim() ?? '';
@@ -88,8 +94,8 @@ const TableOfContents = ({ title }: Props) => {
 
   return (
     <div className='animate-introSecond flex flex-col'>
-      <div className='h-[425px] hidden md:block' />
-      <div className='sticky top-[132px] h-32 hidden md:block'>
+      <div className='h-[168px] hidden md:block' />
+      <div className='sticky top-[132px] hidden md:block'>
         <nav className="space-y-2 text-sm min-w-32">
           <span className='text-main text-base font-bold'>{title}</span>
           {sections.map((section) => (
@@ -112,6 +118,24 @@ const TableOfContents = ({ title }: Props) => {
             </div>
           ))}
         </nav>
+        <div className="flex flex-col flex-wrap mt-10 gap-2">
+          <span className='text-main text-base font-bold'>{'관련 포스트'}</span>
+          {term.tags?.map((tag: Tags, index: number) => (
+            tag.internal_link ? (
+              <Link
+                key={index}
+                href={transformToSlug(tag.internal_link)}
+                className='font-normal text-sm text-main cursor-pointer transition-colors underline underline-offset-4 decoration-light hover:text-accent hover:decoration-accent'
+              >
+                {tag.name}
+              </Link>
+            ) : (
+              <span key={index} className='font-normal text-sm'>
+                <span className='border-b border-light pb-px text-gray1'>{tag.name}</span>
+              </span>
+            )
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -6,11 +6,11 @@ interface CarouselClientWrapperProps {
   children: React.ReactNode;
   itemCount: number;
   itemWidth: number;
+  speed?: number;
 }
 
-const revolveSpeed = 0.25; // 0.5px/s
-
-const CarouseltWrapper = ({ children, itemWidth }: CarouselClientWrapperProps) => {
+const CarouseltWrapper = ({ children, itemWidth, speed = 0.2 }: CarouselClientWrapperProps) => {
+  const revolveSpeed = speed;
   const [time, setTime] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const animationFrameRef = useRef<number | null>(null);
@@ -23,7 +23,7 @@ const CarouseltWrapper = ({ children, itemWidth }: CarouselClientWrapperProps) =
   const animate = useCallback(() => {
     setTime((time) => time + revolveSpeed);
     animationFrameRef.current = requestAnimationFrame(animate);
-  }, []);
+  }, [revolveSpeed]);
 
   useEffect(() => {
     animationFrameRef.current = requestAnimationFrame(animate);
@@ -35,7 +35,7 @@ const CarouseltWrapper = ({ children, itemWidth }: CarouselClientWrapperProps) =
   }, [animate]);
 
   useEffect(() => {
-    if (scrollPosition && scrollPosition % childWidth === 0) {
+    if (scrollPosition && Math.abs(scrollPosition) % childWidth === 0) {
       setChildrenArray((prev) => [...prev.slice(1), prev[0]]);
       setTime((time) => time - childWidth);
     }

@@ -7,6 +7,11 @@ import GoogleVerification from '@/components/meta/GoogleVerification';
 import GoogleAdSense from '@/components/meta/GoogleAdSense';
 import GoogleAnalytics from '@/components/meta/GoogleAnalytics';
 import { dikiMetadata } from '@/constants';
+import Script from 'next/script';
+import ReduxProvider from '@/components/redux/ReduxProvider';
+import StoreInitializer from '@/components/redux/StoreInitializer';
+import { fetchTermsData } from '@/utils/termsData';
+import Footer from '@/components/common/Footer';
 
 interface RootLayoutProps {
   readonly children: React.ReactNode;
@@ -47,17 +52,21 @@ export const metadata: Metadata = {
   },
 };
 
-const RootLayout = ({ children }: RootLayoutProps) => {
+const RootLayout = async ({ children }: RootLayoutProps) => {
+  const terms = await fetchTermsData();
+
   return (
     <html lang='en' suppressHydrationWarning>
       <head>
         <GoogleVerification />
         <GoogleAdSense />
         <GoogleAnalytics />
-        <meta
-          name="google-site-verification"
-          content="IvRh4cnrlBoqcniXnKIWq_aDj41S2xiwVrng89cvzww"
+        <link rel="canonical" href="https://dxwiki.github.io" />
+        <Script
+          src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"
+          strategy="afterInteractive"
         />
+        <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js" />
       </head>
       <body
         className={`
@@ -67,11 +76,16 @@ const RootLayout = ({ children }: RootLayoutProps) => {
           ${ fontNoto.variable } 
         `}
       >
-        <ThemeProvider>
-          <Header />
-          <main className='mt-16 max-w-6xl min-h-[calc(100vh_-150px)] mx-auto px-4 py-3 md:px-6 lg:px-8'>{children}</main>
-          <div className='w-full h-20 flex justify-center items-center text-gray1 text-sm'>{'© 2024 dxwiki All rights reserved.'}</div>
-        </ThemeProvider>
+        <ReduxProvider>
+          <StoreInitializer terms={terms} />
+          <ThemeProvider>
+            <Header />
+            <main className='mt-16 max-w-6xl min-h-[calc(100vh_-150px)] mx-auto px-4 py-3 md:px-6 lg:px-8'>{children}</main>
+            <div className='hidden sm:block'>
+              <Footer />
+            </div>
+          </ThemeProvider>
+        </ReduxProvider>
       </body>
     </html>
   );

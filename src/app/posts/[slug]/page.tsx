@@ -59,6 +59,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PostPage({ params }: Props) {
   const term = await getTermData(params.slug);
+  const termsData = await fetchTermsData();
+  const lastTermId = termsData[termsData.length - 1].id ?? 1;
 
   if (!term) {
     notFound();
@@ -66,7 +68,7 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <>
-      <PostDetail term={term} slug={params.slug} />
+      <PostDetail term={term} slug={params.slug} lastTermId={lastTermId} />
     </>
   );
 }

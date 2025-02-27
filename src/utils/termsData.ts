@@ -1,17 +1,20 @@
 import { firestore } from '@/libs/firebaseAdmin';
 import { TermData } from '@/types';
 import { transformToSlug } from '@/utils/filters';
-
-let cachedTermsData: TermData[] | null = null;
+import { store } from '@/store';
+import { setTerms, setLoading, setError } from '@/store/termsSlice';
 
 const fetchTermsData = async (): Promise<TermData[]> => {
-  if (cachedTermsData) {
-    return cachedTermsData;
+  const state = store.getState();
+  if (state.terms.terms.length > 0) {
+    return state.terms.terms;
   }
+
+  store.dispatch(setLoading(true));
 
   try {
     const termsCollection = await firestore.collection('terms').get();
-    cachedTermsData = termsCollection.docs.map((doc) => {
+    const termsData = termsCollection.docs.map((doc) => {
       const data = doc.data();
       const urlPath = transformToSlug(data.title.en);
       return {
@@ -29,12 +32,15 @@ const fetchTermsData = async (): Promise<TermData[]> => {
         description: data.description,
       } as TermData;
     });
-  } catch (error) {
-    console.error('Error fetching terms:', error);
-    cachedTermsData = [];
-  }
 
-  return cachedTermsData;
+    store.dispatch(setTerms(termsData));
+    return termsData;
+  } catch (error) {
+    const errorMessage = 'Error fetching terms: ' + error;
+    store.dispatch(setError(errorMessage));
+    console.error(errorMessage);
+    return [];
+  }
 };
 
 const getTermData = async (slug: string): Promise<TermData | undefined> => {
@@ -45,7 +51,12 @@ const getTermData = async (slug: string): Promise<TermData | undefined> => {
 };
 
 const clearCache = () => {
-  cachedTermsData = null;
+  store.dispatch(setTerms([]));
 };
 
-export { fetchTermsData, getTermData, clearCache };
+const getTermDataByID = async (id: number): Promise<TermData | undefined> => {
+  const termsDataList = await fetchTermsData();
+  return termsDataList.find((term) => term.id === id);
+};
+
+export { fetchTermsData, getTermData, clearCache, getTermDataByID };
