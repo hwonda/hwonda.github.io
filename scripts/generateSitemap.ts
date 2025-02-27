@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs';
+import { writeFileSync } from 'fs';
 import { dikiMetadata } from '@/constants';
 import { fetchTermsData } from '@/utils/termsData';
 
@@ -9,18 +9,7 @@ interface SitemapURL {
   priority: number;
 }
 
-const generateSitemapURL = ({ loc, lastmod, changefreq, priority }: SitemapURL): string => {
-  return `
-    <url>
-      <loc>${ loc }</loc>
-      <lastmod>${ lastmod }</lastmod>
-      <changefreq>${ changefreq }</changefreq>
-      <priority>${ priority }</priority>
-    </url>
-  `;
-};
-
-const getSitemapURLs = async (): Promise<SitemapURL[]> => {
+const generateSitemapXML = async (): Promise<string> => {
   const baseUrl = dikiMetadata.url;
   const postLists = await fetchTermsData();
 
@@ -50,20 +39,15 @@ const getSitemapURLs = async (): Promise<SitemapURL[]> => {
     }),
   ];
 
-  return urls;
-};
-
-const generateSitemapXML = (urls: SitemapURL[]): string => {
-  return `<?xml version="1.0" encoding="UTF-8"?>
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-      ${ urls.map(generateSitemapURL).join('') }
-    </urlset>`;
+  return `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  ${ urls.map(({ loc, lastmod, changefreq, priority }) =>
+    `<url><loc>${ loc }</loc><lastmod>${ lastmod }</lastmod><changefreq>${ changefreq }</changefreq><priority>${ priority }</priority></url>`
+  ).join('') }
+  </urlset>`;
 };
 
 (async () => {
-  const urls = await getSitemapURLs();
-  const sitemap = generateSitemapXML(urls);
-
-  await fs.writeFile('out/sitemap.xml', sitemap);
+  const sitemap = await generateSitemapXML();
+  writeFileSync('out/sitemap.xml', sitemap);
   console.log('sitemap.xml generated in public directory');
 })();
