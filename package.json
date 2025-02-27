@@ -2,7 +2,7 @@
   "name": "diki",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://dxwiki.github.io/",
+  "homepage": "https://hwonda.github.io/",
   "scripts": {
     "dev": "next dev",
     "prebuild": "rimraf .next",

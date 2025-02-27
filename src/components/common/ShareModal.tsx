@@ -77,7 +77,7 @@ const ShareModal = ({ isOpen, onClose }: ShareModalProps) => {
       content: {
         title: document.title,
         description: document.querySelector('meta[name="description"]')?.getAttribute('content') || '',
-        imageUrl: 'https://dxwiki.github.io/thumbnail.png',
+        imageUrl: 'https://hwonda.github.io/thumbnail.png',
         link: {
           mobileWebUrl: window.location.href,
           webUrl: window.location.href,
