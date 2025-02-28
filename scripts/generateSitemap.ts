@@ -30,20 +30,18 @@ import { generateSitemapXML } from '../src/utils/sitemap';
     },
   ];
 
-  const simplifiedUrlsTemp3 = `
-  <?xml version="1.0" encoding="UTF-8"?>
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-      <url>
-        <loc>https://hwonda.github.io/</loc>
-      </url>
-      <url>
-        <loc>https://hwonda.github.io/posts</loc>
-      </url>
-      <url>
-        <loc>https://hwonda.github.io/contact</loc>
-      </url>
-    </urlset>`
-      ;
+  const simplifiedUrlsTemp3 = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <url>
+    <loc>https://hwonda.github.io/</loc>
+  </url>
+  <url>
+    <loc>https://hwonda.github.io/posts</loc>
+  </url>
+  <url>
+    <loc>https://hwonda.github.io/contact</loc>
+  </url>
+</urlset>`;
 
   const simplifiedSitemap = generateSitemapXML(simplifiedUrlsTemp);
   const simplifiedSitemap2 = generateSitemapXML(simplifiedUrlsTemp2);
@@ -57,7 +55,7 @@ import { generateSitemapXML } from '../src/utils/sitemap';
     // writeFileSync('public/sitemap.xml', sitemap, 'utf-8'),
     // writeFileSync('public/sitemap-temp.xml', simplifiedSitemap, 'utf-8'),
     // writeFileSync('public/sitemap-temp2.xml', simplifiedSitemap2, 'utf-8'),
-    // writeFileSync('public/sitemap-temp5.xml', simplifiedUrlsTemp3, 'utf-8'),
+    writeFileSync('public/sitemap-temp5.xml', simplifiedUrlsTemp3, 'utf-8'),
   ]);
 
   console.log('sitemap.xml, sitemap-temp.xml, and sitemap-temp2.xml generated in out/ directory');
