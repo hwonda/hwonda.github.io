@@ -48,15 +48,15 @@ import { generateSitemapXML } from '../src/utils/sitemap';
 
   // 사이트맵 파일 생성
   await Promise.all([
-    writeFileSync('out/sitemap.xml', sitemap, 'utf-8'),
+    writeFileSync('out/sitemap-base.xml', sitemap, 'utf-8'),
     writeFileSync('out/sitemap-temp3.xml', simplifiedSitemap, 'utf-8'),
     writeFileSync('out/sitemap-temp4.xml', simplifiedSitemap2, 'utf-8'),
     writeFileSync('out/sitemap-temp5.xml', simplifiedUrlsTemp3, 'utf-8'),
     // writeFileSync('public/sitemap.xml', sitemap, 'utf-8'),
     // writeFileSync('public/sitemap-temp.xml', simplifiedSitemap, 'utf-8'),
     // writeFileSync('public/sitemap-temp2.xml', simplifiedSitemap2, 'utf-8'),
-    writeFileSync('public/sitemap-temp5.xml', simplifiedUrlsTemp3, 'utf-8'),
+    // writeFileSync('public/sitemap-temp5.xml', simplifiedUrlsTemp3, 'utf-8'),
   ]);
 
-  console.log('sitemap.xml, sitemap-temp.xml, and sitemap-temp2.xml generated in out/ directory');
+  console.log('sitemap-base.xml, sitemap-temp.xml, and sitemap-temp2.xml generated in out/ directory');
 })();
