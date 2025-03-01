@@ -52,6 +52,7 @@ import { generateSitemapXML } from '../src/utils/sitemap';
     writeFileSync('out/sitemap-temp3.xml', simplifiedSitemap, 'utf-8'),
     writeFileSync('out/sitemap-temp4.xml', simplifiedSitemap2, 'utf-8'),
     writeFileSync('out/sitemap-temp5.xml', simplifiedUrlsTemp3, 'utf-8'),
+    writeFileSync('out/sitemap-temp6.xml', sitemap, 'utf-8'),
     // writeFileSync('public/sitemap.xml', sitemap, 'utf-8'),
     // writeFileSync('public/sitemap-temp.xml', simplifiedSitemap, 'utf-8'),
     // writeFileSync('public/sitemap-temp2.xml', simplifiedSitemap2, 'utf-8'),
