@@ -61,7 +61,7 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
         <GoogleVerification />
         <GoogleAdSense />
         <GoogleAnalytics />
-        <link rel="canonical" href="https://hwonda.github.io" />
+        <link rel="canonical" href="https://hwonda-github-pages.vercel.app" />
         <Script
           src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"
           strategy="afterInteractive"

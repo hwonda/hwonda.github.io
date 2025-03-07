@@ -3,7 +3,7 @@ import { fetchTermsData } from '@/utils/termsData';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const terms = await fetchTermsData();
-  const baseUrl = 'https://hwonda.github.io';
+  const baseUrl = 'https://hwonda-github-pages.vercel.app';
 
   const termsList = terms.map((term) => ({
     url: `${ baseUrl }/posts/${ term.url }`,
